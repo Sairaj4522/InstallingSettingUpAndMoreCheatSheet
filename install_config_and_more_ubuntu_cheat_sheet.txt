@@ -25,7 +25,7 @@ using webupd8team ppa
 Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
 	sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
 
-Installing kvm for Android Studio (source:https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator)
+Installing kvm for Android Studio (source:http://tinyurl.com/os95xme)
 
 (documentation page:https://help.ubuntu.com/community/KVM/Installation)
 	sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
@@ -175,32 +175,59 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 #Adding some of the commands here.
 	git diff commit1 commit2
 	#Compare file changes between commit1 and commit2
+	
 	git diff 
 	#Compare file changes between working directory and staging area
+	
 	git diff --staged
 	#Compare file change between staging area and latest commit in the repository
+	
 	git log
 	#Log all the reachable commits in the current checked out branch
+	
 	git log --graph --oneline master coins
+	#Show all logs in form of graph to see the branching in current repo,
+	#its useful to see when a some other branch in this case coins was created to
+	#see which code base from master(or to find the tip of the master at that branch
+	#creation) it is derived from, here --oneline tag specifies to git log to print 
+	#in more concise/compact format
+	
 	git log -n 1
-	#Show all logs in form of graph to see the branching in current repo, its useful to see when a some other branch in this case coins was created to see which code base from master(or to find the tip of the master at that branch creation) it is derived from, here --oneline tag specifies to git log to print in more concise/compact format
 	#Log only one latest commit, here -n 1 specifies git log to show only one output
+	
 	git status
-	#Check status of your local repo, whether a file is yet to be staged, commited or pushed(in case of remote repo)
+	#Check status of your local repo, whether a file is yet to be staged, commited or
+	#pushed(in case of remote repo)
+	
 	git checkout some-branch
-	#Switch between various branches in your repo, also can put commit git hash in place of 'some-branch' name to checkout that particular commit
+	#Switch between various branches in your repo, also can put commit git hash in place
+	#of 'some-branch' name to checkout that particular commit
+	
 	git merge master some-other-branch
-	#Combine two branches together if there a conflict solve them and then use git commit to do final steps of this command
+	#Combine two branches together if there a conflict solve them and then use git commit
+	#to do final steps of this command
+	
 	git branch
 	#View all branches in current repo
+	
 	git branch coins
 	#Create a branch named 'coins'
+	
 	git branch -d coins 
 	#Delete a branch named 'coins'
+	
 	git pull
-	#Get all the repo info/files from some other repo, also acts as update as in subversion, which updates the local repo by pulling data/info from remote
+	#Get all the repo info/files from some other repo, also acts as update as in subversion,
+	#which updates the local repo by pulling data/info from remote
+	
 	git fetch
-	#Think of this command as if it's made for GitHub, if there's a situation when you make a commit to your local repo but u did not push it to remote, and in remote repo(i.e at GitHub) someone or you have changed some file which will result in a new commit on remote repo. Now you want to push changes from local repo but git wont let that happen due to unmatching commit on both local and remote side. this is where git fetch comes in u fetch, merge, resolve the conflicts if any, and finally merge them as single commit in master and origin/master branch, and finnally push to be in sync
+	#Think of this command as if it's made for GitHub, if there's a situation when you make
+	#a commit to your local repo but u did not push it to remote, and in remote repo(i.e at GitHub)
+	#someone or you have changed some file which will result in a new commit on remote repo. Now you
+	#want to push changes from local repo but git wont let that happen due to unmatching commit on
+	#both local and remote side. this is where git fetch comes in u fetch, merge, resolve the conflicts
+	#if any, and finally merge them as single commit in master and origin/master branch, and finally 
+	#push to be in sync
 	
 
 #TO DO

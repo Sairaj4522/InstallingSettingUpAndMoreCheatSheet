@@ -220,7 +220,15 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 	#Get all the repo info/files from some other repo, also acts as update as in subversion,
 	#which updates the local repo by pulling data/info from remote
 	
+								git fetch origin
+									|
+	git pull origin master = {		|
+									V
+								git merge master origin/master
 	git fetch
+	#This updates your local origin/master, while keeping the master intact(this is only in
+	#case of a conflict in commits between local and remote repo)
+	#
 	#Think of this command as if it's made for GitHub, if there's a situation when you make
 	#a commit to your local repo but u did not push it to remote, and in remote repo(i.e at GitHub)
 	#someone or you have changed some file which will result in a new commit on remote repo. Now you

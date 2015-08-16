@@ -327,3 +327,9 @@ Use strings command line to scan for strings in the binary file
 
 flaunt with the monkey
 	adb shell monkey -p com.thenewboston.travis.androiddevtuts -v 10000
+
+Add alias to a common action
+add this to your ~/.bashrc
+	alias name='value'
+where name is the short form of the action(value) that you choose for example
+	alias ogc='google-chrome'

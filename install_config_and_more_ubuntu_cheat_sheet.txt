@@ -20,6 +20,7 @@ just before 'exit 0' add
 Installing Oracle Java
 using webupd8team ppa
 	sudo apt-add-repository ppa:webupd8team/java
+	sudo apt-get install oracle-java6-installer
 	sudo apt-get install oracle-java7-installer
 	sudo apt-get install oracle-java8-installer
 Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
@@ -333,3 +334,8 @@ add this to your ~/.bashrc
 	alias name='value'
 where name is the short form of the action(value) that you choose for example
 	alias ogc='google-chrome'
+
+Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
+	sudo apt-get install dconf-editor 
+	sudo apt-get install gtk-theme-config 
+Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it

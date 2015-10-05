@@ -288,7 +288,7 @@ In order to access these devices the user must also belong to dialout group
 	sudo adduser your-user-name dialout
 At last uploading hex file
 	sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex
-	sudo avrdude -p m32 -c usbasp -P usb -U ~/workspace/autoclk3.0/Release/autoclk3.0.hex
+	sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex
 Go to http://www.fischl.de/avrusbboot/ and download the avrusbboot.2006-06-25.tar.gz and extract
 	tar -xvfz avrusbboot.2006-06-25.tar.gz 
 for custom avr usb bootloader  and folow instructions on the same website to make

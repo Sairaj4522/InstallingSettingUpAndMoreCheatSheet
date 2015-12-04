@@ -336,3 +336,62 @@ Customize theme specifics in Ubuntu, such as highlight color, menu background co
 	sudo apt-get install dconf-editor 
 	sudo apt-get install gtk-theme-config 
 Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it
+
+Create Bootable Ubuntu USB 
+	Either use Ubuntu default Startup Disk Creator or right click on the ISO file
+	and open with Disk Image Writer select the USB drive, start the restore 
+	procedure and after when its done you have your bootable USB drive.
+Refference:
+(http://askubuntu.com/questions/485357/unknown-error-from-startup-disk-creator)
+
+Create Windows Bootable USB on Ubuntu
+1. Format USB
+	Open GParted, first unmount the USB drive, recreate the partition table by going
+	to the Device menu then select Create Partition Table. Choose 'msdos' and click
+	Apply.
+
+	Right click on the unallocated space and select New, Make a primary NTFS or FAT32
+	partition and give it a label, this label will be required later.
+
+	Apply all pending operations, now Right click the partition and add the 'boot' flag
+	by selecting Manage Flags and tick the checkbox next to 'boot'
+
+2. Copy Windows files
+	Close GParted and use nautilus to copy all files from Windows ISO to USB stick.
+	Mount ISO using Open with - Disk Image Mounter
+
+3. Make it Bootable
+	sudo apt-get install grub-pc-bin
+	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
+		Replace /dev/sdX with the USB drive(eg. /dev/sdb)
+
+	Create grub.cfg file
+
+		default=1  
+		timeout=15
+		color_normal=light-cyan/dark-gray
+		menu_color_normal=black/light-cyan
+		menu_color_highlight=white/black
+		 
+		menuentry "Start Windows Installation" {
+		    insmod ntfs
+		    insmod search_label
+		    search --no-floppy --set=root --label <USB_drive_label> --hint hd0,msdos1
+		    ntldr /bootmgr
+		}
+
+		menuentry "Boot from the first hard drive" {
+		    insmod ntfs
+		    insmod chain
+		    insmod part_msdos
+		    insmod part_gpt
+		    set root=(hd1)
+		    chainloader +1
+		    boot
+		}
+
+	Replace <USB_drive_label> with the label from step 1
+	Save this file and put in boot/grub folder on USB drive.
+
+Refference:
+(http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)

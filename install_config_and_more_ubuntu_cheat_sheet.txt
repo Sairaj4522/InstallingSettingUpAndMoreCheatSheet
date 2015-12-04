@@ -97,6 +97,10 @@ clean using
 	sudo apt-get install clean
 	sudo apt-get install autoclean
 
+Check for broken packages fix and clean
+	sudo apt-get install --fix-broken 
+	sudo apt-get install --fix-missing 
+
 Enable Hibernate
 	sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
 
@@ -303,13 +307,6 @@ another dependency for compiling above programs
 	cd ../software
 	make
 	sudo ./avrusbboot ~/test.hex
-
-Check for broken packages, fix, clean and do lots more
-	sudo apt-get install clean
-	sudo apt-get install autoremove
-	sudo apt-get install -f
-	sudo apt-get install --fix-broken 
-	sudo apt-get install --fix-missing 
 
 Setting up Genymotion
 	sudo apt-get install virtualbox

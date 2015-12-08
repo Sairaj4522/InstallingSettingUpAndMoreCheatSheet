@@ -86,8 +86,8 @@ Install redshift
 	sudo gedit /usr/share/applications/redshift-gtk.desktop
 add  '-l 18.98:72.83' next to 'Exec=redshift-gtk'
 start redshift and select autostart in its options menu
-	sudo gedit /usr/share/autostart/RedshiftAutostart.desktop 
-again, add  -l 18.98:72.83 next to Exec=redshiftautostart
+Open Startup Applications app select RedShift and press edit button
+and add '-l 18.98:72.83' next to 'redshift-gtk' Command field
 
 To fix unmet dependencies of the packages installed on the system
 	sudo apt-get install -f

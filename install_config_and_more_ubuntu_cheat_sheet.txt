@@ -67,6 +67,7 @@ SUBSYSTEM=="usb" ATTR{idVendor}=="04dd", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="0fce", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="0930", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="19d2", MODE="0666"
+SUBSYSTEM=="usb" ATTR{idVendor}=="1782", MODE="0666"
 
 	sudo cp android.rules /etc/udev/rules.d/51-android.rules
 	sudo chmod og+r /etc/udev/rules.d/51-android.rules
@@ -395,3 +396,66 @@ Create Windows Bootable USB on Ubuntu
 
 Refference:
 (http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)
+
+List of softwares for Ubuntu
+vlc browser-plugin-vlc
+chrome
+gstreamer1.0 0.10 good bad ugly
+
+Flashing MTK based mobile devices
+First install libusb-dev
+	sudo apt-get install libusb-dev
+Get latest SP Flash tool Linux version from http://spflashtool.com/
+unzip the file and cd into the directory
+In order to avoid running the flash_tool as root user, you need to add a standard user to the usergroup "dialout"
+	sudo adduser username dialout
+and activate the membership immediately
+	newgrp - dialout
+Open the tool
+	./flash_tool
+You can try at this stage if the flash tool connects to your phone:
+In the user interface, choose tab „Download“. Hit "scatter-loading", navigate to a directory with a valid firmware for your device and choose the scatter-file.
+For testing purposes uncheck "name" and check one of the smaller files in the list below (for example "logo") 
+Switch off your device. Hit the "Download" button in SP_Flash_Tool and connect your phone to the computer. Some devices require you to take off the battery for about 10 seconds, with others you need to press Vol+ or Vol- while plugging the cable into the phone. Please look up device-specific threads and try out different options.
+
+If nothing happens at all, open a second terminal, run
+	dmesg | grep usb
+and look out for a MediaTek entry. If there is none -> did you install libusb-dev
+If the answer is yes, you might need to create a persistent udev rule for the MTK Preloader:
+	sudo gedit /etc/udev/rules.d/80-persistent-usb.rules
+and add the following line to the file:
+	SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="*"
+save the file and exit.
+Reload the usb-rules:
+	sudo service udev restart
+
+Disconnect the usb cable, close the tool window.
+Now try repeating the procedure to get your phone in fastboot mode, in case of MTK devices MTK preloader, which means just connect phone to pc without battery, and later add the battery after you open the tool and press Download button.
+
+If the tool connects, within a few seconds a red progress bar will appear. Unfortunately, in my case an error message came along with it:
+S_BROM_CMD_JUMP_DA_FAIL (2035)
+There is a connection, but also one more obstacle to overcome
+
+If it shows S_BROM_CMD_JUMP_DA_FAIL error, the reason and solution is mentioned in this XDA thread(http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
+	Quote:
+		"This is because the 'modemmanager` package integrated by default within Linux Ubuntu 14.04 and later is not compatible with the MTK Flash Tool."
+To put it in other words: The modem manager controls port /dev/ttyACM0 and disables the Flash Tool. So we blacklist it for the two MTK vendor IDs the flash tool uses:
+	sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules
+with the following contents:
+	ATTRS{idVendor}=="0e8d", ENV{ID_MM_DEVICE_IGNORE}="1"
+	ATTRS{idVendor}=="6000", ENV{ID_MM_DEVICE_IGNORE}="1"
+Restart udev for the changes to take effect:
+	sudo service udev restart
+Switch your phone on (fastboot mode will suffice) and off again
+	./flash_tool
+
+Now everything should run smoothly. In case you encounter
+	BROM ERROR : S_SECURITY_SF_CODE_FORMAT_FORBIDDEN (6012) , MSP ERROE CODE : 0x00
+change the download agent to MTK_AllInOne_DA.bin 
+
+If you run into more errors, you could get a hint about what is wrong from here: Flashtools errors and their solutions! - MIUI(http://en.miui.com/thread-78047-1-1.html)
+
+References:
+	http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc
+	http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802
+	http://en.miui.com/thread-78047-1-1.html

@@ -26,6 +26,24 @@ using webupd8team ppa
 Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
 	sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
 
+On Fedora install Oracle Java by downloading rpm from official website and install it
+	sudo dnf install jdk-8u73-linux-x64.rpm
+
+	su -
+	alternatives --install /usr/bin/java java /usr/java/default/jre/bin/java 200000
+	alternatives --install /usr/bin/javaws javaws /usr/java/default/jre/bin/javaws 200000
+	alternatives --install /usr/lib64/mozilla/plugins/libjavaplugin.so libjavaplugin.so.x86_64 /usr/java/default/jre/lib/amd64/libnpjp2.so 200000
+	alternatives --install /usr/bin/javac javac /usr/java/default/bin/javac 200000
+	alternatives --install /usr/bin/jar jar /usr/java/default/bin/jar 200000
+	alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_73/jre/bin/java 200000
+
+	su -
+	alternatives --config java
+	alternatives --config javaws
+	alternatives --config libjavaplugin.so.x86_64
+	alternatives --config javac
+	alternatives --config jar
+
 Installing kvm for Android Studio (source:http://tinyurl.com/os95xme)
 
 (documentation page:https://help.ubuntu.com/community/KVM/Installation)

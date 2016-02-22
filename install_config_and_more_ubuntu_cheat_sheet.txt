@@ -18,31 +18,33 @@ just before 'exit 0' add
 	rfkill block bluetooth
 
 Installing Oracle Java
-using webupd8team ppa
-	sudo apt-add-repository ppa:webupd8team/java
-	sudo apt-get install oracle-java6-installer
-	sudo apt-get install oracle-java7-installer
-	sudo apt-get install oracle-java8-installer
+	-Ubuntu
+		using webupd8team ppa
+			sudo apt-add-repository ppa:webupd8team/java
+			sudo apt-get install oracle-java6-installer
+			sudo apt-get install oracle-java7-installer
+			sudo apt-get install oracle-java8-installer
 Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
 	sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
 
-On Fedora install Oracle Java by downloading rpm from official website and install it
-	sudo dnf install jdk-8u73-linux-x64.rpm
+	-Fedora
+		install Oracle Java by downloading rpm from official website
+			sudo dnf install jdk-8u73-linux-x64.rpm
 
-	su -
-	alternatives --install /usr/bin/java java /usr/java/default/jre/bin/java 200000
-	alternatives --install /usr/bin/javaws javaws /usr/java/default/jre/bin/javaws 200000
-	alternatives --install /usr/lib64/mozilla/plugins/libjavaplugin.so libjavaplugin.so.x86_64 /usr/java/default/jre/lib/amd64/libnpjp2.so 200000
-	alternatives --install /usr/bin/javac javac /usr/java/default/bin/javac 200000
-	alternatives --install /usr/bin/jar jar /usr/java/default/bin/jar 200000
-	alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_73/jre/bin/java 200000
+			su -
+			alternatives --install /usr/bin/java java /usr/java/default/jre/bin/java 200000
+			alternatives --install /usr/bin/javaws javaws /usr/java/default/jre/bin/javaws 200000
+			alternatives --install /usr/lib64/mozilla/plugins/libjavaplugin.so libjavaplugin.so.x86_64 /usr/java/default/jre/lib/amd64/libnpjp2.so 200000
+			alternatives --install /usr/bin/javac javac /usr/java/default/bin/javac 200000
+			alternatives --install /usr/bin/jar jar /usr/java/default/bin/jar 200000
+			alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_73/jre/bin/java 200000
 
-	su -
-	alternatives --config java
-	alternatives --config javaws
-	alternatives --config libjavaplugin.so.x86_64
-	alternatives --config javac
-	alternatives --config jar
+			su -
+			alternatives --config java
+			alternatives --config javaws
+			alternatives --config libjavaplugin.so.x86_64
+			alternatives --config javac
+			alternatives --config jar
 
 Installing kvm for Android Studio (source:http://tinyurl.com/os95xme)
 
@@ -136,9 +138,13 @@ ResultActive=yes
 killall unity-panel-service
 
 Installing Sublime-text-3
-	sudo add-apt-repository ppa:webupd8team/sublime-text-3
-	sudo apt-get update
-	sudo apt-get install sublime-text-installer
+	-Ubuntu/Debian
+		sudo add-apt-repository ppa:webupd8team/sublime-text-3
+		sudo apt-get update
+		sudo apt-get install sublime-text-installer
+
+	-Fedora/(other linux distros)
+		$  curl -L git.io/sublimetext | sh
 
 Install subversion and git
 	sudo apt-get install subversion

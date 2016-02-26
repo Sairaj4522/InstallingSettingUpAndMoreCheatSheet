@@ -151,8 +151,8 @@ Install subversion and git
 	sudo apt-get install git
 
 Setup git global properties using
-	git config --global user.email "sairaj4522@gmail.com"
-	git config --global user.name "Sairaj Chavan"
+	git config --global user.email "name@example.com"
+	git config --global user.name "Your Name"
 
 In Terminal, enter the following:
 

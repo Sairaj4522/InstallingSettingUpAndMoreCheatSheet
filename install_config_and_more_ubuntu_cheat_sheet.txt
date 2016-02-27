@@ -334,8 +334,32 @@ another dependency for compiling above programs
 	sudo ./avrusbboot ~/test.hex
 
 Setting up Genymotion
-	sudo apt-get install virtualbox
-Downlaod Genymotion
+	-Ubuntu
+		sudo apt-get install virtualbox
+	-Fedora23
+		Add yum repository for virtualbox
+			cd /etc/yum.repos.d/
+			wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+			dnf update
+
+		check that the system is running latest installed kernel version
+		Output of foll. commands version numbers should match:
+			rpm -qa kernel |sort -V |tail -n 1
+			uname -r
+
+		Install dependencies
+			dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms
+
+		Install VirtualBox latest version 5.0
+			dnf install VirtualBox-5.0
+		Add VirtualBox User to vboxusers Group
+			usermod -a -G vboxusers user_name
+		Start VirtualBox and proceed to installing Genymotion
+			VirtualBox
+Refference:
+http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/
+
+Download Genymotion
 	chmod +x genymotion-x.x.x_x64.bin
 	./genymotion-x.x.x_x64.bin
 

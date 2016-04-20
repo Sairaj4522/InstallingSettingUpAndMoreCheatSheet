@@ -556,3 +556,16 @@ References:
 	http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc
 	http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802
 	http://en.miui.com/thread-78047-1-1.html
+
+Configure hotkeys on Fedora
+https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora
+Open Settings->Keyboard, switch to Shortcuts tab
+Then configure Audio control and volume control keys by assigning new accelerator
+Now select Custom Shortcuts in left pane, here you can add new shortcuts by clicking on + button ;
+for adding hotkeys for brightness control install xbacklight
+	sudo dnf install xbacklight
+then press that + button and add name and command in the fields in the dialog window
+for increasing brightness, xbacklight -inc 10%
+and for decreasing it, xbacklight -dec 10%
+these commands increases or decreases brightness by 10 percent
+#TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys

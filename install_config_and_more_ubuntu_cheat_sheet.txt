@@ -569,3 +569,15 @@ for increasing brightness, xbacklight -inc 10%
 and for decreasing it, xbacklight -dec 10%
 these commands increases or decreases brightness by 10 percent
 #TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
+
+
+Mount drives on boot in Fedora 23
+To do this we have to edit /etc/fstab file, so 
+	sudo gedit /etc/fstab
+and add following
+	/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2
+
+where: /dev/sda4 is the partition name
+	   /run/media/my_user_name/Data is the mount point
+	   ntfs is the partition type
+	   you have to choose options as defaults and latter part is the order to check

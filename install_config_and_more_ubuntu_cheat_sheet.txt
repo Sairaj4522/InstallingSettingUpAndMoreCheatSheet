@@ -29,7 +29,7 @@ Smart way to setup Java alternatives // Got it from .deb package oracle-java7-se
 
 	-Fedora
 		install Oracle Java by downloading rpm from official website
-			sudo dnf install jdk-8u73-linux-x64.rpm
+			sudo dnf install jdk-8u92-linux-x64.rpm
 
 			su -
 			alternatives --install /usr/bin/java java /usr/java/default/jre/bin/java 200000
@@ -37,7 +37,7 @@ Smart way to setup Java alternatives // Got it from .deb package oracle-java7-se
 			alternatives --install /usr/lib64/mozilla/plugins/libjavaplugin.so libjavaplugin.so.x86_64 /usr/java/default/jre/lib/amd64/libnpjp2.so 200000
 			alternatives --install /usr/bin/javac javac /usr/java/default/bin/javac 200000
 			alternatives --install /usr/bin/jar jar /usr/java/default/bin/jar 200000
-			alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_73/jre/bin/java 200000
+			alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_92/jre/bin/java 200000
 
 			su -
 			alternatives --config java
@@ -158,7 +158,8 @@ In Terminal, enter the following:
 
 	git config --global credential.helper cache
 	# Set git to use the credential memory cache
-To change the default password cache timeout, enter the following:
+To change the defau
+lt password cache timeout, enter the following:
 
 	git config --global credential.helper 'cache --timeout=3600'
 	# Set the cache to timeout after 1 hour (setting is in seconds)
@@ -373,7 +374,7 @@ Use strings command line to scan for strings in the binary file
 	strings some_binary_file
 
 flaunt with the monkey
-	adb shell monkey -p com.thenewboston.travis.androiddevtuts -v 10000
+	adb shell monkey -p com.example.android.app -v 10000
 
 Add alias to a common action
 add this to your ~/.bashrc
@@ -568,16 +569,21 @@ then press that + button and add name and command in the fields in the dialog wi
 for increasing brightness, xbacklight -inc 10%
 and for decreasing it, xbacklight -dec 10%
 these commands increases or decreases brightness by 10 percent
+
+Add terminal shortcut using any name for the title and add command as
+gnome-terminal
+
 #TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
 
 
 Mount drives on boot in Fedora 23
 To do this we have to edit /etc/fstab file, so 
 	sudo gedit /etc/fstab
-and add following
+and add following to the end of the file:
 	/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2
 
 where: /dev/sda4 is the partition name
-	   /run/media/my_user_name/Data is the mount point
-	   ntfs is the partition type
-	   you have to choose options as defaults and latter part is the order to check
+       /run/media/my_user_name/Data is the mount point
+       ntfs is the partition type you have to choose options as defaults and latter part is the order to check
+
+

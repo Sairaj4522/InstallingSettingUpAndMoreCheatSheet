@@ -46,12 +46,19 @@ Smart way to setup Java alternatives // Got it from .deb package oracle-java7-se
 			alternatives --config javac
 			alternatives --config jar
 
+Referrence:-(http://www.if-not-true-then-false.com/2014/install-oracle-java-8-on-fedora-centos-rhel/)
+
 Installing kvm for Android Studio (source:http://tinyurl.com/os95xme)
 
 (documentation page:https://help.ubuntu.com/community/KVM/Installation)
 	sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 	sudo adduser your_user_name kvm
 	sudo adduser your_user_name libvirtd
+
+Under Fedora
+	sudo useradd maez -D -G dialout,kvm,libvirtd
+	or try,
+	sudo usermod meaz -a -G dialout,kvm,libvirtd
 
 Solving Android device unauthorised in adb devices list
 
@@ -586,4 +593,5 @@ where: /dev/sda4 is the partition name
        /run/media/my_user_name/Data is the mount point
        ntfs is the partition type you have to choose options as defaults and latter part is the order to check
 
-
+Fix Native Window Placement extention to display the title on top or bottom
+	Tweak the stylesheet.css to modify the window title placement. open "/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css", change "-shell-caption-spacing" as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.

@@ -1,7 +1,8 @@
-Brightness control fix
+###Brightness control fix on Ubuntu
 	sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 	sudo gedit /usr/share/X11/xorg.conf.d/20-intel.conf
-
+and add the following 
+```bash
 Section	"Device"
 	Identifier "card0"
 	Driver	   "intel"
@@ -9,26 +10,26 @@ Section	"Device"
 "Backlight" "intel_backlight"
 	BusID	"PCI:0:2:0"
 EndSection
+```
 
-
-Disable Bluetooth by Default on Startup
+###Disable Bluetooth by Default on Startup
 	sudo gedit /etc/rc.local
 
 just before 'exit 0' add
 	rfkill block bluetooth
 
-Installing Oracle Java
-	-Ubuntu
+###Installing Oracle Java
+	- Ubuntu
 		using webupd8team ppa
 			sudo apt-add-repository ppa:webupd8team/java
 			sudo apt-get install oracle-java6-installer
 			sudo apt-get install oracle-java7-installer
 			sudo apt-get install oracle-java8-installer
-Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
-	sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
+		Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
+			sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
 
-	-Fedora
-		install Oracle Java by downloading rpm from official website
+	- Fedora
+		Install Oracle Java by downloading rpm from official website
 			sudo dnf install jdk-8u92-linux-x64.rpm
 
 			su -
@@ -46,11 +47,12 @@ Smart way to setup Java alternatives // Got it from .deb package oracle-java7-se
 			alternatives --config javac
 			alternatives --config jar
 
-Referrence:-(http://www.if-not-true-then-false.com/2014/install-oracle-java-8-on-fedora-centos-rhel/)
+######Referrence:
+- [Install Oracle Java JDK/JRE 8u66 on Fedora 23/22, CentOS/RHEL 7.2/6.7/5.11](http://www.if-not-true-then-false.com/2014/install-oracle-java-8-on-fedora-centos-rhel/)
 
-Installing kvm for Android Studio (source:http://tinyurl.com/os95xme)
+###Installing kvm for Android Studio ([source](https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator))
 
-(documentation page:https://help.ubuntu.com/community/KVM/Installation)
+[click here for documentation page](https://help.ubuntu.com/community/KVM/Installation)
 	sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 	sudo adduser your_user_name kvm
 	sudo adduser your_user_name libvirtd
@@ -60,10 +62,11 @@ Under Fedora
 	or try,
 	sudo usermod meaz -a -G dialout,kvm,libvirtd
 
-Solving Android device unauthorised in adb devices list
+###Solving Android device unauthorised in adb devices list
 
 	gedit android.rules
 
+```bash
 SUBSYSTEM=="usb" ATTR{idVendor}=="0bb4", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="0e79", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="0502", MODE="0666"
@@ -95,21 +98,21 @@ SUBSYSTEM=="usb" ATTR{idVendor}=="0fce", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="0930", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="19d2", MODE="0666"
 SUBSYSTEM=="usb" ATTR{idVendor}=="1782", MODE="0666"
-
+```
 	sudo cp android.rules /etc/udev/rules.d/51-android.rules
 	sudo chmod og+r /etc/udev/rules.d/51-android.rules
 
-Uninstall Libreoffice and install Openoffice
+###Uninstall Libreoffice and install Openoffice
 	aptitude search '~i' | grep libreoffice
 	sudo apt-get install -s remove libreoffice-core
 	sudo apt-get install remove libreoffice-core
 Download OpenOffice from it's official website, *.tar.gz, extract and
 	sudo dpkg -i *.deb
 
-Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
+###Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
 
 
-Install redshift
+###Install redshift
 	sudo apt-get install redshift*
 	sudo gedit /usr/share/applications/redshift-gtk.desktop
 add  '-l 18.98:72.83' next to 'Exec=redshift-gtk'
@@ -117,21 +120,21 @@ start redshift and select autostart in its options menu
 Open Startup Applications app select RedShift and press edit button
 and add '-l 18.98:72.83' next to 'redshift-gtk' Command field
 
-To fix unmet dependencies of the packages installed on the system
+###To fix unmet dependencies of the packages installed on the system
 	sudo apt-get install -f
-To remove packages not needed anymore
+###To remove packages not needed anymore
 	sudo apt-get install autoremove
 clean using
 	sudo apt-get install clean
 	sudo apt-get install autoclean
 
-Check for broken packages fix and clean
+###Check for broken packages fix and clean
 	sudo apt-get install --fix-broken 
 	sudo apt-get install --fix-missing 
 
-Enable Hibernate
+###Enable Hibernate
 	sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
-
+```bash
 [Re-enable hibernate by default in upower]
 Identity=unix-user:*
 Action=org.freedesktop.upower.hibernate
@@ -141,37 +144,35 @@ ResultActive=yes
 Identity=unix-user:*
 Action=org.freedesktop.login1.hibernate
 ResultActive=yes
-
+```
 killall unity-panel-service
 
-Installing Sublime-text-3
-	-Ubuntu/Debian
+###Installing Sublime-text-3
+	- Ubuntu/Debian
 		sudo add-apt-repository ppa:webupd8team/sublime-text-3
 		sudo apt-get update
 		sudo apt-get install sublime-text-installer
 
-	-Fedora/(other linux distros)
+	- Fedora/(other linux distros)
 		$  curl -L git.io/sublimetext | sh
 
-Install subversion and git
+###Install subversion and git
 	sudo apt-get install subversion
 	sudo apt-get install git
 
-Setup git global properties using
+###Setup git global properties using
 	git config --global user.email "name@example.com"
 	git config --global user.name "Your Name"
 
 In Terminal, enter the following:
-
 	git config --global credential.helper cache
 	# Set git to use the credential memory cache
-To change the defau
-lt password cache timeout, enter the following:
-
+	
+To change the default password cache timeout, enter the following:
 	git config --global credential.helper 'cache --timeout=3600'
 	# Set the cache to timeout after 1 hour (setting is in seconds)
 
-Doing Git Stuff
+###Doing Git Stuff
 	echo "# exploring_java_src" >> README.md
 	git init
 	git add README.md
@@ -180,19 +181,18 @@ Doing Git Stuff
 	git checkout -b "master"
 	git push -u origin master
 
-Enable color output from git log or whatever
+###Enable color output from git log or whatever
 	git config --global color.ui auto
 and some additional global configs
 	git config --global core.editor "subl -n -w"
 	git config --global push.default upstream
 	git config --global merg.conflictstyle diff3
 
-Configuring Git prompt
+###Configuring Git prompt
 add following to the end of ~/.bashrc for this you need git-prompt.sh and git-completion.bash
 
-
-
-# Enable tab completion
+####Enable tab completion
+```bash
 #source ~/git-completion.bash
 source /etc/bash_completion.d/git-prompt
 
@@ -201,16 +201,19 @@ green="\[\033[0;32m\]"
 blue="\[\033[0;34m\]"
 purple="\[\033[0;35m\]"
 reset="\[\033[0m\]"
+```
 
-# Change command prompt
+####Change command prompt
+```bash
 source ~/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 # '\u' adds the name of the current user to the prompt
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
 export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
-
-#Adding some of the commands here.
+```
+###Adding some of the commands here.
+```bash
 	git diff commit1 commit2
 	#Compare file changes between commit1 and commit2
 	
@@ -274,16 +277,15 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 	#both local and remote side. this is where git fetch comes in u fetch, merge, resolve the conflicts
 	#if any, and finally merge them as single commit in master and origin/master branch, and finally 
 	#push to be in sync
+	```
 	
 
-#TO DO
-#Download How to Use Git and GitHub Udacity Videos and add
-#all git commands here.
+TODO Download How to Use Git and GitHub Udacity Videos and add all git commands here.
 
 Installing Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04
 
 
-Setting up ClamAV and Running Virus scans:
+###Setting up ClamAV and Running Virus scans:
 	sudo apt-get install clamav clamav-daemon -y
 update the clamav pattern file:
 	sudo freshclam
@@ -296,22 +298,19 @@ Start clamav-daemon(clamd):
 Check clamd status :
 	sudo /etc/init.d/clamav-daemon status
 
-Changing brightness at Startup to lower value as compare to max_brightness
+###Changing brightness at Startup to lower value as compare to max_brightness
 Add this line to '/etc/rc.local' before 'exit 0'
 	echo 900 > /sys/class/backlight/intel_backlight/brightness
 
-Adding AVR support in eclipse on Ubuntu
+###Adding AVR support in eclipse on Ubuntu
 	sudo apt-get install avr-libc avrdude binutils-avr
 Open eclipse
-go to Help-->Install New Software...
-and add http://avr-eclipse.sourceforge.net/updatesite/
-in Text input and press Add Site button
+Go to Help-->Install New Software... and add http://avr-eclipse.sourceforge.net/updatesite/ in Text input and press Add Site button
 
-Adding support for the varous USB AVR devices
+###Adding support for the varous USB AVR devices
 Create a file avrisp.rules
-
 	gedit ~/avrisp.rules
-
+```bash
 SUBSYTEM!="usb_device", ACTION!="add", GOTO="avrisp_end"
 # Atmel Corp. JTAG ICE mkII
 ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2103", MODE="660", GROUP="dialout"
@@ -319,14 +318,14 @@ ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2103", MODE="660", GROUP="dialout"
 ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2104", MODE="660", GROUP="dialout"
 # Atmel Corp. Dragon
 ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2107", MODE="660", GROUP="dialout" LABEL="avrisp_end"
-
+```
 	sudo cp ~/avrisp.rules /etc/udev/60-avrisp.rules
 In order to access these devices the user must also belong to dialout group
 	sudo adduser your-user-name dialout
 At last uploading hex file
 	sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex
 	sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex
-Go to http://www.fischl.de/avrusbboot/ and download the avrusbboot.2006-06-25.tar.gz and extract
+Go to [this site](http://www.fischl.de/avrusbboot/) and download the avrusbboot.2006-06-25.tar.gz(or grab the latest one if available) and extract
 	tar -xvfz avrusbboot.2006-06-25.tar.gz 
 for custom avr usb bootloader  and folow instructions on the same website to make
 the bootloader and the program to upload the hex file on the micro-controller
@@ -341,88 +340,88 @@ another dependency for compiling above programs
 	make
 	sudo ./avrusbboot ~/test.hex
 
-Setting up Genymotion
-	-Ubuntu
+###Setting up Genymotion
+	- Ubuntu
 		sudo apt-get install virtualbox
-	-Fedora23
-		Add yum repository for virtualbox
+	- Fedora23
+		-  Add yum repository for virtualbox
 			cd /etc/yum.repos.d/
 			wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
 			dnf update
 
-		check that the system is running latest installed kernel version
+		-  Check that the system is running latest installed kernel version
 		Output of foll. commands version numbers should match:
 			rpm -qa kernel |sort -V |tail -n 1
 			uname -r
 
-		Install dependencies
+		-  Install dependencies
 			dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms
 
-		Install VirtualBox latest version 5.0
+		-  Install VirtualBox latest version 5.0
 			dnf install VirtualBox-5.0
-		Add VirtualBox User to vboxusers Group
+		-  Add VirtualBox User to vboxusers Group
 			usermod -a -G vboxusers user_name
-		Start VirtualBox and proceed to installing Genymotion
+		-  Start VirtualBox and proceed to installing Genymotion
 			VirtualBox
-Refference:
-http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/
+######Refference:
+- [VirtualBox 5.0 on Fedora 24/23, CentOS/RHEL 7.2/6.8/5.11](http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/)
 
-Download Genymotion
+###Download Genymotion
 	chmod +x genymotion-x.x.x_x64.bin
 	./genymotion-x.x.x_x64.bin
 
-Cool Java stuff
+###Cool Java stuff
 	//Diagonosing java code to find out if a method is not good to run as a inline method
 	java -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining jcookb.SubStringDemo
 	//Running JUnit Tests
 	java -cp $CLASSPATH org.junit.runner.JUnitCore testing.SuiteTest
 
-Use strings command line to scan for strings in the binary file
+###Use strings command line to scan for strings in the binary file
 	strings some_binary_file
 
-flaunt with the monkey
+###Flaunt with the monkey
 	adb shell monkey -p com.example.android.app -v 10000
 
-Add alias to a common action
-add this to your ~/.bashrc
+###Add alias to a common action
+Add this to your ~/.bashrc
 	alias name='value'
 where name is the short form of the action(value) that you choose for example
 	alias ogc='google-chrome'
 
-Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
+###Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
 	sudo apt-get install dconf-editor 
 	sudo apt-get install gtk-theme-config 
 Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it
 
-Create Bootable Ubuntu USB 
+###Create Bootable Ubuntu USB 
 	Either use Ubuntu default Startup Disk Creator or right click on the ISO file
 	and open with Disk Image Writer select the USB drive, start the restore 
 	procedure and after when its done you have your bootable USB drive.
-Refference:
-(http://askubuntu.com/questions/485357/unknown-error-from-startup-disk-creator)
+######Refference:
+- [Unknown ERROR from Startup Disk Creator](http://askubuntu.com/questions/485357/unknown-error-from-startup-disk-creator)
 
-Create Windows Bootable USB on Ubuntu
+###Create Windows Bootable USB on Ubuntu
 1. Format USB
-	Open GParted, first unmount the USB drive, recreate the partition table by going
+	-  Open GParted, first unmount the USB drive, recreate the partition table by going
 	to the Device menu then select Create Partition Table. Choose 'msdos' and click
 	Apply.
 
-	Right click on the unallocated space and select New, Make a primary NTFS or FAT32
+	-  Right click on the unallocated space and select New, Make a primary NTFS or FAT32
 	partition and give it a label, this label will be required later.
 
-	Apply all pending operations, now Right click the partition and add the 'boot' flag
+	-  Apply all pending operations, now Right click the partition and add the 'boot' flag
 	by selecting Manage Flags and tick the checkbox next to 'boot'
 
 2. Copy Windows files
-	Close GParted and use nautilus to copy all files from Windows ISO to USB stick.
-	Mount ISO using Open with - Disk Image Mounter
+	-  Close GParted and use nautilus to copy all files from Windows ISO to USB stick.
+	-  Mount ISO using Open with - Disk Image Mounter
 
 3. Make it Bootable
 	sudo apt-get install grub-pc-bin
 	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
 		Replace /dev/sdX with the USB drive(eg. /dev/sdb)
 
-	Create grub.cfg file
+	-  Create grub.cfg file
 
 		default=1  
 		timeout=15
@@ -447,31 +446,32 @@ Create Windows Bootable USB on Ubuntu
 		    boot
 		}
 
-	Replace <USB_drive_label> with the label from step 1
-	Save this file and put in boot/grub folder on USB drive.
+		Replace <USB_drive_label> with the label from step 1
+		Save this file and put in boot/grub folder on USB drive.
 
-Refference:
-(http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)
-
-
-List of softwares for Ubuntu
-vlc browser-plugin-vlc
-chrome
-gstreamer 1.0 and 0.10 full(good, bad and ugly) 
+######Refference:
+- [Make a bootable Windows USB from Linux](http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)
 
 
-Unlocking Bootloader on Moto e
+###List of softwares for Ubuntu
+- vlc browser-plugin-vlc
+- chrome
+- gstreamer 1.0 and 0.10 full(good, bad and ugly) 
+
+
+###Unlocking Bootloader on Moto e
 first get unlock data which will be fed to OEM to get secret code
 	fastboot oem get_unlock_data
 
 	fastboot oem unlock {secret-code-from-OEM}
 
-#TODO Add extracting .img files and cwm flashable zip creation steps
-in adb shell issue these commands to get mount information
+TODO Add extracting .img files and cwm flashable zip creation steps
+
+In adb shell issue these commands to get mount information
 	cat /proc/dumchar_info
 	cat /proc/mtd
 
-Flashing Devices with Fastboot mode
+###Flashing Devices with Fastboot mode
 install Android SDK which provides almost all the tools to do this.
 issue this command to check if the device is detected
 	fastboot devices
@@ -481,7 +481,7 @@ now fetch your recovery.img, boot.img, etc.
 	fastboot flash logo logo.bin
 
 
-Flashing MTK based mobile devices
+###Flashing MTK based mobile devices
 
 first install libusb-dev
 	sudo apt-get install libusb-dev
@@ -557,16 +557,14 @@ Now everything should run smoothly. In case you encounter
 	BROM ERROR : S_SECURITY_SF_CODE_FORMAT_FORBIDDEN (6012) , MSP ERROE CODE : 0x00
 change the download agent to MTK_AllInOne_DA.bin 
 
-If you run into more errors, you could get a hint about what is wrong from here:
-Flashtools errors and their solutions! - MIUI(http://en.miui.com/thread-78047-1-1.html)
+If you run into more errors, you could get a hint about what is wrong from [here](http://en.miui.com/thread-78047-1-1.html "Flashtools errors and their solutions! - MIUI")
 
-References:
-	http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc
-	http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802
-	http://en.miui.com/thread-78047-1-1.html
+######References:
+	- [How to root MTK based mobile devices using a Linux PC?](http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc)
+	- [[TUTORIAL]How to setup SP_Flash_Tool_Linux (MTK/MediaTek Soc)](http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
 
-Configure hotkeys on Fedora
-https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora
+###Configure hotkeys on Fedora
+[click here for original post](https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora)
 Open Settings->Keyboard, switch to Shortcuts tab
 Then configure Audio control and volume control keys by assigning new accelerator
 Now select Custom Shortcuts in left pane, here you can add new shortcuts by clicking on + button ;
@@ -580,10 +578,10 @@ these commands increases or decreases brightness by 10 percent
 Add terminal shortcut using any name for the title and add command as
 gnome-terminal
 
-#TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
+TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
 
 
-Mount drives on boot in Fedora 23
+###Mount drives on boot in Fedora 23
 To do this we have to edit /etc/fstab file, so 
 	sudo gedit /etc/fstab
 and add following to the end of the file:
@@ -593,8 +591,8 @@ where: /dev/sda4 is the partition name
        /run/media/my_user_name/Data is the mount point
        ntfs is the partition type you have to choose options as defaults and latter part is the order to check
 
-Fix Native Window Placement extention to display the title on top or bottom
-	Tweak the stylesheet.css to modify the window title placement. open "/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css", change "-shell-caption-spacing" as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
+###Fix Native Window Placement extention to display the title on top or bottom
+Tweak the stylesheet.css to modify the window title placement.open "/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css", change "-shell-caption-spacing" as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
 
 ###Add API keys to Android Studio for your apps the right way
 First open gradle.properties file, then add API key in the form

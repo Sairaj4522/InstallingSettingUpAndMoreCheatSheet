@@ -20,7 +20,7 @@ just before 'exit 0' add
 
 ###Installing Oracle Java
 	- Ubuntu
-		using webupd8team ppa
+		Using webupd8team ppa
 			sudo apt-add-repository ppa:webupd8team/java
 			sudo apt-get install oracle-java6-installer
 			sudo apt-get install oracle-java7-installer
@@ -53,17 +53,21 @@ just before 'exit 0' add
 ###Installing kvm for Android Studio ([source](https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator))
 
 [click here for documentation page](https://help.ubuntu.com/community/KVM/Installation)
+ - Ubuntu
+	```bash
 	sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 	sudo adduser your_user_name kvm
 	sudo adduser your_user_name libvirtd
+	```
 
-Under Fedora
+ - Fedora
+	```bash
 	sudo useradd maez -D -G dialout,kvm,libvirtd
 	or try,
 	sudo usermod meaz -a -G dialout,kvm,libvirtd
+	```
 
 ###Solving Android device unauthorised in adb devices list
-
 	gedit android.rules
 
 ```bash
@@ -115,20 +119,20 @@ Download OpenOffice from it's official website, *.tar.gz, extract and
 ###Install redshift
 	sudo apt-get install redshift*
 	sudo gedit /usr/share/applications/redshift-gtk.desktop
-add  '-l 18.98:72.83' next to 'Exec=redshift-gtk'
+add  `-l 18.98:72.83` next to `Exec=redshift-gtk`
 start redshift and select autostart in its options menu
 Open Startup Applications app select RedShift and press edit button
-and add '-l 18.98:72.83' next to 'redshift-gtk' Command field
+and add `-l 18.98:72.83` next to `redshift-gtk` Command field
 
-###To fix unmet dependencies of the packages installed on the system
+###Ubuntu/Debian APT stuff
+- To fix unmet dependencies of the packages installed on the system
 	sudo apt-get install -f
-###To remove packages not needed anymore
+- To remove packages not needed anymore
 	sudo apt-get install autoremove
-clean using
+- Clean using
 	sudo apt-get install clean
 	sudo apt-get install autoclean
-
-###Check for broken packages fix and clean
+- Check for broken packages fix and clean
 	sudo apt-get install --fix-broken 
 	sudo apt-get install --fix-missing 
 
@@ -160,19 +164,20 @@ killall unity-panel-service
 	sudo apt-get install subversion
 	sudo apt-get install git
 
-###Setup git global properties using
+###Doing Git Stuff
+- Setup git global properties using
 	git config --global user.email "name@example.com"
 	git config --global user.name "Your Name"
 
-In Terminal, enter the following:
+- In Terminal, enter the following:
 	git config --global credential.helper cache
 	# Set git to use the credential memory cache
 	
-To change the default password cache timeout, enter the following:
+- To change the default password cache timeout, enter the following:
 	git config --global credential.helper 'cache --timeout=3600'
 	# Set the cache to timeout after 1 hour (setting is in seconds)
 
-###Doing Git Stuff
+- Intiate an repo and sync with remote repo
 	echo "# exploring_java_src" >> README.md
 	git init
 	git add README.md
@@ -181,18 +186,18 @@ To change the default password cache timeout, enter the following:
 	git checkout -b "master"
 	git push -u origin master
 
-###Enable color output from git log or whatever
+- Enable color output from git log or whatever
 	git config --global color.ui auto
-and some additional global configs
+- And some additional global configs
 	git config --global core.editor "subl -n -w"
 	git config --global push.default upstream
 	git config --global merg.conflictstyle diff3
 
 ###Configuring Git prompt
-add following to the end of ~/.bashrc for this you need git-prompt.sh and git-completion.bash
+Add following to the end of ~/.bashrc for this you need [git-prompt.sh](../blob/master/git-prompt.sh) and [git-completion.bash](../blob/master/git-completion.bash)
 
-####Enable tab completion
 ```bash
+#Enable tab completion
 #source ~/git-completion.bash
 source /etc/bash_completion.d/git-prompt
 
@@ -203,8 +208,8 @@ purple="\[\033[0;35m\]"
 reset="\[\033[0m\]"
 ```
 
-####Change command prompt
 ```bash
+#Change command prompt
 source ~/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 # '\u' adds the name of the current user to the prompt
@@ -277,25 +282,26 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 	#both local and remote side. this is where git fetch comes in u fetch, merge, resolve the conflicts
 	#if any, and finally merge them as single commit in master and origin/master branch, and finally 
 	#push to be in sync
-	```
+```
 	
 
 TODO Download How to Use Git and GitHub Udacity Videos and add all git commands here.
 
-Installing Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04
+###Installing Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04
+TODO add stuff here!
 
-
-###Setting up ClamAV and Running Virus scans:
+###Setting up ClamAV and Running Virus scans
+- Install on ubuntu using
 	sudo apt-get install clamav clamav-daemon -y
-update the clamav pattern file:
+- Update the clamav pattern file:
 	sudo freshclam
-Check files in the all users home deirectories:
+- Check files in the all users home deirectories:
 	sudo clamscan -r /home
-Scan and remove virus files:
+- Scan and remove virus files:
 	sudo clamscan --infected --remove --recursive /home
-Start clamav-daemon(clamd):
+- Start clamav-daemon(clamd):
 	sudo /etc/init.d/clamav-daemon start
-Check clamd status :
+- Check clamd status :
 	sudo /etc/init.d/clamav-daemon status
 
 ###Changing brightness at Startup to lower value as compare to max_brightness

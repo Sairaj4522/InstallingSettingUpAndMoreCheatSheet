@@ -120,21 +120,22 @@ Download OpenOffice from it's official website, *.tar.gz, extract and
 	sudo apt-get install redshift*
 	sudo gedit /usr/share/applications/redshift-gtk.desktop
 add  `-l 18.98:72.83` next to `Exec=redshift-gtk`
-start redshift and select autostart in its options menu
+start redshift and select autostart in its options menu.
+
 Open Startup Applications app select RedShift and press edit button
-and add `-l 18.98:72.83` next to `redshift-gtk` Command field
+and add `-l 18.98:72.83` next to `redshift-gtk` command field
 
 ###Ubuntu/Debian APT stuff
 - To fix unmet dependencies of the packages installed on the system
-	sudo apt-get install -f
+	`sudo apt-get install -f`
 - To remove packages not needed anymore
-	sudo apt-get install autoremove
+	`sudo apt-get install autoremove`
 - Clean using
-	sudo apt-get install clean
-	sudo apt-get install autoclean
+	`sudo apt-get install clean`
+	`sudo apt-get install autoclean`
 - Check for broken packages fix and clean
-	sudo apt-get install --fix-broken 
-	sudo apt-get install --fix-missing 
+	`sudo apt-get install --fix-broken`
+	`sudo apt-get install --fix-missing`
 
 ###Enable Hibernate
 	sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
@@ -149,7 +150,7 @@ Identity=unix-user:*
 Action=org.freedesktop.login1.hibernate
 ResultActive=yes
 ```
-killall unity-panel-service
+`killall unity-panel-service`
 
 ###Installing Sublime-text-3
 	- Ubuntu/Debian
@@ -158,7 +159,7 @@ killall unity-panel-service
 		sudo apt-get install sublime-text-installer
 
 	- Fedora/(other linux distros)
-		$  curl -L git.io/sublimetext | sh
+		curl -L git.io/sublimetext | sh
 
 ###Install subversion and git
 	sudo apt-get install subversion
@@ -166,18 +167,19 @@ killall unity-panel-service
 
 ###Doing Git Stuff
 - Setup git global properties using
-	git config --global user.email "name@example.com"
-	git config --global user.name "Your Name"
+	`git config --global user.email "name@example.com"`
+	`git config --global user.name "Your Name"`
 
 - In Terminal, enter the following:
-	git config --global credential.helper cache
-	# Set git to use the credential memory cache
+	`git config --global credential.helper cache`
+	`# Set git to use the credential memory cache`
 	
 - To change the default password cache timeout, enter the following:
-	git config --global credential.helper 'cache --timeout=3600'
-	# Set the cache to timeout after 1 hour (setting is in seconds)
+	`git config --global credential.helper 'cache --timeout=3600'`
+	`# Set the cache to timeout after 1 hour (setting is in seconds)`
 
 - Intiate an repo and sync with remote repo
+	```bash
 	echo "# exploring_java_src" >> README.md
 	git init
 	git add README.md
@@ -185,14 +187,16 @@ killall unity-panel-service
 	git remote add origin https://github.com/Sairaj4522/exploring_java_src.git
 	git checkout -b "master"
 	git push -u origin master
-
+	```
 - Enable color output from git log or whatever
-	git config --global color.ui auto
+	`git config --global color.ui auto`
 - And some additional global configs
+	```bash
 	git config --global core.editor "subl -n -w"
 	git config --global push.default upstream
 	git config --global merg.conflictstyle diff3
-
+	```
+	
 ###Configuring Git prompt
 Add following to the end of ~/.bashrc for this you need [git-prompt.sh](../blob/master/git-prompt.sh) and [git-completion.bash](../blob/master/git-completion.bash)
 
@@ -292,30 +296,30 @@ TODO add stuff here!
 
 ###Setting up ClamAV and Running Virus scans
 - Install on ubuntu using
-	sudo apt-get install clamav clamav-daemon -y
+	`sudo apt-get install clamav clamav-daemon -y`
 - Update the clamav pattern file:
-	sudo freshclam
+	`sudo freshclam`
 - Check files in the all users home deirectories:
-	sudo clamscan -r /home
+	`sudo clamscan -r /home`
 - Scan and remove virus files:
-	sudo clamscan --infected --remove --recursive /home
+	`sudo clamscan --infected --remove --recursive /home`
 - Start clamav-daemon(clamd):
-	sudo /etc/init.d/clamav-daemon start
+	`sudo /etc/init.d/clamav-daemon start`
 - Check clamd status :
-	sudo /etc/init.d/clamav-daemon status
+	`sudo /etc/init.d/clamav-daemon status`
 
 ###Changing brightness at Startup to lower value as compare to max_brightness
 Add this line to '/etc/rc.local' before 'exit 0'
-	echo 900 > /sys/class/backlight/intel_backlight/brightness
+	`echo 900 > /sys/class/backlight/intel_backlight/brightness`
 
 ###Adding AVR support in eclipse on Ubuntu
-	sudo apt-get install avr-libc avrdude binutils-avr
+	`sudo apt-get install avr-libc avrdude binutils-avr`
 Open eclipse
 Go to Help-->Install New Software... and add http://avr-eclipse.sourceforge.net/updatesite/ in Text input and press Add Site button
 
 ###Adding support for the varous USB AVR devices
 Create a file avrisp.rules
-	gedit ~/avrisp.rules
+	`gedit ~/avrisp.rules`
 ```bash
 SUBSYTEM!="usb_device", ACTION!="add", GOTO="avrisp_end"
 # Atmel Corp. JTAG ICE mkII
@@ -325,17 +329,18 @@ ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2104", MODE="660", GROUP="dialout"
 # Atmel Corp. Dragon
 ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2107", MODE="660", GROUP="dialout" LABEL="avrisp_end"
 ```
-	sudo cp ~/avrisp.rules /etc/udev/60-avrisp.rules
+	`sudo cp ~/avrisp.rules /etc/udev/60-avrisp.rules`
 In order to access these devices the user must also belong to dialout group
-	sudo adduser your-user-name dialout
+	`sudo adduser your-user-name dialout`
 At last uploading hex file
-	sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex
-	sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex
+	`sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex`
+	`sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex`
 Go to [this site](http://www.fischl.de/avrusbboot/) and download the avrusbboot.2006-06-25.tar.gz(or grab the latest one if available) and extract
-	tar -xvfz avrusbboot.2006-06-25.tar.gz 
-for custom avr usb bootloader  and folow instructions on the same website to make
+	`tar -xvfz avrusbboot.2006-06-25.tar.gz`
+for custom avr usb bootloader  and follow instructions on the same website to make
 the bootloader and the program to upload the hex file on the micro-controller
 another dependency for compiling above programs
+	```bash
 	sudo apt-get install libusb
 	cd avrusbboot.2006-06-25
 	cd firmware
@@ -345,6 +350,7 @@ another dependency for compiling above programs
 	cd ../software
 	make
 	sudo ./avrusbboot ~/test.hex
+	```
 
 ###Setting up Genymotion
 	- Ubuntu
@@ -390,13 +396,13 @@ another dependency for compiling above programs
 
 ###Add alias to a common action
 Add this to your ~/.bashrc
-	alias name='value'
+	`alias name='value'`
 where name is the short form of the action(value) that you choose for example
-	alias ogc='google-chrome'
+	`alias ogc='google-chrome'`
 
 ###Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
-	sudo apt-get install dconf-editor 
-	sudo apt-get install gtk-theme-config 
+	`sudo apt-get install dconf-editor `
+	`sudo apt-get install gtk-theme-config` 
 Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it
 
 ###Create Bootable Ubuntu USB 
@@ -423,12 +429,14 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 	-  Mount ISO using Open with - Disk Image Mounter
 
 3. Make it Bootable
+	```bash
 	sudo apt-get install grub-pc-bin
 	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
-		Replace /dev/sdX with the USB drive(eg. /dev/sdb)
+	```	Replace /dev/sdX with the USB drive(eg. /dev/sdb)
 
 	-  Create grub.cfg file
-
+		and add following
+		```bash
 		default=1  
 		timeout=15
 		color_normal=light-cyan/dark-gray
@@ -451,7 +459,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 		    chainloader +1
 		    boot
 		}
-
+		```
 		Replace <USB_drive_label> with the label from step 1
 		Save this file and put in boot/grub folder on USB drive.
 
@@ -466,42 +474,43 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 
 
 ###Unlocking Bootloader on Moto e
-first get unlock data which will be fed to OEM to get secret code
-	fastboot oem get_unlock_data
-
-	fastboot oem unlock {secret-code-from-OEM}
+First get unlock data which will be fed to OEM to get secret code
+	`fastboot oem get_unlock_data`
+	`fastboot oem unlock {secret-code-from-OEM}`
 
 TODO Add extracting .img files and cwm flashable zip creation steps
 
 In adb shell issue these commands to get mount information
-	cat /proc/dumchar_info
-	cat /proc/mtd
+	`cat /proc/dumchar_info`
+	`cat /proc/mtd`
 
 ###Flashing Devices with Fastboot mode
 install Android SDK which provides almost all the tools to do this.
 issue this command to check if the device is detected
-	fastboot devices
+	`fastboot devices`
 now fetch your recovery.img, boot.img, etc.
+	```bash
 	fastboot flash recovery recovery.img
 	fastboot flash boot boot.img
 	fastboot flash logo logo.bin
+	```
 
 
 ###Flashing MTK based mobile devices
 
-first install libusb-dev
-	sudo apt-get install libusb-dev
+First install libusb-dev
+	`sudo apt-get install libusb-dev`
 
 Get latest SP Flash tool Linux version from http://spflashtool.com/
 unzip the file and cd into the directory
 
 In order to avoid running the flash_tool as root user, you need to add a standard user to the usergroup "dialout"
-	sudo adduser username dialout
+	`sudo adduser username dialout`
 and activate the membership immediately
-	newgrp - dialout
+	`newgrp - dialout`
 
 Open the tool
-	./flash_tool
+	`./flash_tool`
 
 You can try at this stage if the flash tool connects to your phone:
 In the user interface, choose tab „Download“. Hit "scatter-loading", navigate to a directory with a valid firmware
@@ -517,19 +526,19 @@ while plugging the cable into the phone.
 Please look up device-specific threads and try out different options.
 
 If nothing happens at all, open a second terminal, run
-	dmesg | grep usb
+	`dmesg | grep usb`
 and look out for a MediaTek entry. If there is none -> did you install libusb-dev
 
 If the answer is yes, then you might need to create a persistent udev rule for the MTK Preloader:
-	sudo gedit /etc/udev/rules.d/80-persistent-usb.rules
+	`sudo gedit /etc/udev/rules.d/80-persistent-usb.rules`
 
 and add the following line to the file:
-	SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="*"
+	`SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="*"`
 
 save the file and exit.
 
 Reload the usb-rules:
-	sudo service udev restart
+	`sudo service udev restart`
 
 Disconnect the usb cable, close the tool window.
 
@@ -548,16 +557,18 @@ From Sergio Riveros tutorial on mibqyyo, he mentions:
 
 To put it in other words: The modem manager controls port /dev/ttyACM0 and disables the Flash Tool. So we
 blacklist it for the two MTK vendor IDs the flash tool uses:
-	sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules
+	`sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules`
 with the following contents:
+	```bash
 	ATTRS{idVendor}=="0e8d", ENV{ID_MM_DEVICE_IGNORE}="1"
 	ATTRS{idVendor}=="6000", ENV{ID_MM_DEVICE_IGNORE}="1"
+	```
 
 Restart udev for the changes to take effect:
-	sudo service udev restart
+	`sudo service udev restart`
 
 Switch your phone on (fastboot mode will suffice) and off again
-	./flash_tool
+	`./flash_tool`
 
 Now everything should run smoothly. In case you encounter
 	BROM ERROR : S_SECURITY_SF_CODE_FORMAT_FORBIDDEN (6012) , MSP ERROE CODE : 0x00
@@ -570,35 +581,38 @@ If you run into more errors, you could get a hint about what is wrong from [here
 	- [[TUTORIAL]How to setup SP_Flash_Tool_Linux (MTK/MediaTek Soc)](http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
 
 ###Configure hotkeys on Fedora
-[click here for original post](https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora)
+[click here for original post.](https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora)
 Open Settings->Keyboard, switch to Shortcuts tab
 Then configure Audio control and volume control keys by assigning new accelerator
+
 Now select Custom Shortcuts in left pane, here you can add new shortcuts by clicking on + button ;
 for adding hotkeys for brightness control install xbacklight
-	sudo dnf install xbacklight
+
+	`sudo dnf install xbacklight`
+	
 then press that + button and add name and command in the fields in the dialog window
-for increasing brightness, xbacklight -inc 10%
-and for decreasing it, xbacklight -dec 10%
+for increasing brightness, `xbacklight -inc 10%`
+and for decreasing it, `xbacklight -dec 10%`
 these commands increases or decreases brightness by 10 percent
 
 Add terminal shortcut using any name for the title and add command as
-gnome-terminal
+`gnome-terminal`
 
 TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
 
 
 ###Mount drives on boot in Fedora 23
 To do this we have to edit /etc/fstab file, so 
-	sudo gedit /etc/fstab
+	`sudo gedit /etc/fstab`
 and add following to the end of the file:
-	/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2
+	`/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2`
 
 where: /dev/sda4 is the partition name
-       /run/media/my_user_name/Data is the mount point
+       `/run/media/my_user_name/Data` is the mount point
        ntfs is the partition type you have to choose options as defaults and latter part is the order to check
 
 ###Fix Native Window Placement extention to display the title on top or bottom
-Tweak the stylesheet.css to modify the window title placement.open "/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css", change "-shell-caption-spacing" as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
+Tweak the stylesheet.css to modify the window title placement.open `"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css"`, change `"-shell-caption-spacing"` as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
 
 ###Add API keys to Android Studio for your apps the right way
 First open gradle.properties file, then add API key in the form
@@ -616,4 +630,6 @@ and add following
 	}
 
 thats it now use your API keys in Java code by refering BuildConfig constants like,
+```java
 String api_key = BuildConfig.MY_API_KEY;
+```

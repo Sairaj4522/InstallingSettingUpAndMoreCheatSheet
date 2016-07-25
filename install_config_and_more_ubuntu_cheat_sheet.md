@@ -730,18 +730,12 @@ where: /dev/sda4 is the partition name
 
 
 ###Fix Native Window Placement extention to display the title on top or bottom
-Tweak the stylesheet.css to modify the window title placement.open
-	
-	"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css"
-
-	and change 
-
-	"-shell-caption-spacing"
-	as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
+Tweak the stylesheet.css to modify the window title placement.open `"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css` and change `-shell-caption-spacing` as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
 
 ###Add API keys to Android Studio for your apps the right way
 First open gradle.properties file, then add API key in the form
-MyApiKey="{Your API Key}"
+
+	MyApiKey="{Your API Key}"
 
 then open app/build.gradle
 and add following
@@ -756,5 +750,5 @@ and add following
 
 thats it now use your API keys in Java code by refering BuildConfig constants like,
 ```java
-String api_key = BuildConfig.MY_API_KEY;
+	String api_key = BuildConfig.MY_API_KEY;
 ```

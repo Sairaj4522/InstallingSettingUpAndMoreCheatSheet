@@ -433,7 +433,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 	sudo apt-get install grub-pc-bin
 	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
 	```
-	Replace /dev/sdX with the USB drive(eg. /dev/sdb)
+	Replace "/dev/sdX" with the USB drive(eg. /dev/sdb)
 
 	-  Create grub.cfg file
 		and add following
@@ -447,7 +447,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 		menuentry "Start Windows Installation" {
 		    insmod ntfs
 		    insmod search_label
-		    search --no-floppy --set=root --label <USB_drive_label> --hint hd0,msdos1
+		    search --no-floppy --set=root --label usb_drive_label --hint hd0,msdos1
 		    ntldr /bootmgr
 		}
 
@@ -461,7 +461,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 		    boot
 		}
 		```
-		Replace /<USB_drive_label/> with the label from step 1
+		Replace "usb_drive_label" with the label from step 1
 		Save this file and put in boot/grub folder on USB drive.
 
 ######Refference:
@@ -476,7 +476,9 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 
 ###Unlocking Bootloader on Moto e
 First get unlock data which will be fed to OEM to get secret code
+
 	`fastboot oem get_unlock_data`
+
 	`fastboot oem unlock {secret-code-from-OEM}`
 
 TODO Add extracting .img files and cwm flashable zip creation steps

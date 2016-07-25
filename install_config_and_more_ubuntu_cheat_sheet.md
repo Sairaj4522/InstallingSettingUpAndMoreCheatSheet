@@ -461,7 +461,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 		    boot
 		}
 		```
-		Replace <USB_drive_label> with the label from step 1
+		Replace /<USB_drive_label/> with the label from step 1
 		Save this file and put in boot/grub folder on USB drive.
 
 ######Refference:

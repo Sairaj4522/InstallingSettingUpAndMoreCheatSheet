@@ -1,4 +1,4 @@
-# InstallingSettingUpAndMoreCheatSheet
+# [InstallingSettingUpAndMoreCheatSheet](install_config_and_more_ubuntu_cheat_sheet.md)
 This is more like a steps to be done on fresh install of OS.
 this includes Ubuntu and Fedora tricks, most of them are borrowed
 from other sites so that I have all the info in one place and not

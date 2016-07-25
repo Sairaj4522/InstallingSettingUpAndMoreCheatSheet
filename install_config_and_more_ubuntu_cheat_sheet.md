@@ -198,7 +198,7 @@ ResultActive=yes
 	```
 	
 ###Configuring Git prompt
-Add following to the end of ~/.bashrc for this you need [git-prompt.sh](../blob/master/git-prompt.sh) and [git-completion.bash](../blob/master/git-completion.bash)
+Add following to the end of ~/.bashrc for this you need [git-prompt.sh](git-prompt.sh) and [git-completion.bash](git-completion.bash)
 
 ```bash
 #Enable tab completion

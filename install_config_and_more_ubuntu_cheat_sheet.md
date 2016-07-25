@@ -21,15 +21,19 @@ just before 'exit 0' add
 ###Installing Oracle Java
 	- Ubuntu
 		Using webupd8team ppa
+			
 			sudo apt-add-repository ppa:webupd8team/java
 			sudo apt-get install oracle-java6-installer
 			sudo apt-get install oracle-java7-installer
 			sudo apt-get install oracle-java8-installer
+
 		Smart way to setup Java alternatives // Got it from .deb package oracle-java7-set-default
+
 			sudo update-java-alternatives -s java-7-oracle > /dev/null 2>&1
 
 	- Fedora
 		Install Oracle Java by downloading rpm from official website
+			
 			sudo dnf install jdk-8u92-linux-x64.rpm
 
 			su -
@@ -113,7 +117,7 @@ SUBSYSTEM=="usb" ATTR{idVendor}=="1782", MODE="0666"
 Download OpenOffice from it's official website, *.tar.gz, extract and
 	sudo dpkg -i *.deb
 
-###Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
+######Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
 
 
 ###Install redshift
@@ -127,15 +131,21 @@ and add `-l 18.98:72.83` next to `redshift-gtk` command field
 
 ###Ubuntu/Debian APT stuff
 - To fix unmet dependencies of the packages installed on the system
-	`sudo apt-get install -f`
+	
+	sudo apt-get install -f
 - To remove packages not needed anymore
-	`sudo apt-get install autoremove`
+	
+	sudo apt-get install autoremove
 - Clean using
-	`sudo apt-get install clean`
-	`sudo apt-get install autoclean`
+	
+	sudo apt-get install clean
+	
+	sudo apt-get install autoclean
 - Check for broken packages fix and clean
-	`sudo apt-get install --fix-broken`
-	`sudo apt-get install --fix-missing`
+	
+	sudo apt-get install --fix-broken
+
+	sudo apt-get install --fix-missing
 
 ###Enable Hibernate
 	sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
@@ -153,30 +163,35 @@ ResultActive=yes
 `killall unity-panel-service`
 
 ###Installing Sublime-text-3
-	- Ubuntu/Debian
-		sudo add-apt-repository ppa:webupd8team/sublime-text-3
-		sudo apt-get update
-		sudo apt-get install sublime-text-installer
+######Ubuntu/Debian
+	
+	sudo add-apt-repository ppa:webupd8team/sublime-text-3
+	sudo apt-get update
+	sudo apt-get install sublime-text-installer
 
-	- Fedora/(other linux distros)
-		curl -L git.io/sublimetext | sh
+######Fedora/(other linux distros)
+	
+	curl -L git.io/sublimetext | sh
 
 ###Install subversion and git
+	
 	sudo apt-get install subversion
 	sudo apt-get install git
 
 ###Doing Git Stuff
 - Setup git global properties using
-	`git config --global user.email "name@example.com"`
-	`git config --global user.name "Your Name"`
+	
+	git config --global user.email "name@example.com"
+
+	git config --global user.name "Your Name"
 
 - In Terminal, enter the following:
-	`git config --global credential.helper cache`
-	`# Set git to use the credential memory cache`
+	
+	git config --global credential.helper cache `# Set git to use the credential memory cache`
 	
 - To change the default password cache timeout, enter the following:
-	`git config --global credential.helper 'cache --timeout=3600'`
-	`# Set the cache to timeout after 1 hour (setting is in seconds)`
+	
+	git config --global credential.helper 'cache --timeout=3600' `# Set the cache to timeout after 1 hour (setting is in seconds)`
 
 - Intiate an repo and sync with remote repo
 	```bash
@@ -189,7 +204,9 @@ ResultActive=yes
 	git push -u origin master
 	```
 - Enable color output from git log or whatever
-	`git config --global color.ui auto`
+	
+	git config --global color.ui auto
+
 - And some additional global configs
 	```bash
 	git config --global core.editor "subl -n -w"
@@ -296,30 +313,47 @@ TODO add stuff here!
 
 ###Setting up ClamAV and Running Virus scans
 - Install on ubuntu using
-	`sudo apt-get install clamav clamav-daemon -y`
+	
+	sudo apt-get install clamav clamav-daemon -y
+
 - Update the clamav pattern file:
-	`sudo freshclam`
+	
+	sudo freshclam
+
 - Check files in the all users home deirectories:
-	`sudo clamscan -r /home`
+	
+	sudo clamscan -r /home
+
 - Scan and remove virus files:
-	`sudo clamscan --infected --remove --recursive /home`
+	
+	sudo clamscan --infected --remove --recursive /home
+
 - Start clamav-daemon(clamd):
-	`sudo /etc/init.d/clamav-daemon start`
+	
+	sudo /etc/init.d/clamav-daemon start
+
 - Check clamd status :
-	`sudo /etc/init.d/clamav-daemon status`
+	
+	sudo /etc/init.d/clamav-daemon status
+
 
 ###Changing brightness at Startup to lower value as compare to max_brightness
 Add this line to '/etc/rc.local' before 'exit 0'
-	`echo 900 > /sys/class/backlight/intel_backlight/brightness`
+	
+	echo 900 > /sys/class/backlight/intel_backlight/brightness
 
 ###Adding AVR support in eclipse on Ubuntu
-	`sudo apt-get install avr-libc avrdude binutils-avr`
+	
+	sudo apt-get install avr-libc avrdude binutils-avr
+
 Open eclipse
 Go to Help-->Install New Software... and add http://avr-eclipse.sourceforge.net/updatesite/ in Text input and press Add Site button
 
 ###Adding support for the varous USB AVR devices
 Create a file avrisp.rules
-	`gedit ~/avrisp.rules`
+	
+	gedit ~/avrisp.rules
+
 ```bash
 SUBSYTEM!="usb_device", ACTION!="add", GOTO="avrisp_end"
 # Atmel Corp. JTAG ICE mkII
@@ -329,14 +363,23 @@ ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2104", MODE="660", GROUP="dialout"
 # Atmel Corp. Dragon
 ATTR{idVendor}=="03eb", SYSFS{idProduct}=="2107", MODE="660", GROUP="dialout" LABEL="avrisp_end"
 ```
-	`sudo cp ~/avrisp.rules /etc/udev/60-avrisp.rules`
+	
+	sudo cp ~/avrisp.rules /etc/udev/60-avrisp.rules
+
 In order to access these devices the user must also belong to dialout group
-	`sudo adduser your-user-name dialout`
+	
+	sudo adduser your-user-name dialout
+
 At last uploading hex file
-	`sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex`
-	`sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex`
+	
+	sudo avrdude -p m128 -c avrispmkII -P usb -U test.hex
+	
+	sudo avrdude -p m32 -c usbasp -P usb -U ~/test.hex
+
 Go to [this site](http://www.fischl.de/avrusbboot/) and download the avrusbboot.2006-06-25.tar.gz(or grab the latest one if available) and extract
-	`tar -xvfz avrusbboot.2006-06-25.tar.gz`
+	
+	tar -xvfz avrusbboot.2006-06-25.tar.gz
+
 for custom avr usb bootloader  and follow instructions on the same website to make
 the bootloader and the program to upload the hex file on the micro-controller
 another dependency for compiling above programs
@@ -354,61 +397,82 @@ another dependency for compiling above programs
 
 ###Setting up Genymotion
 	- Ubuntu
+		
 		sudo apt-get install virtualbox
+
 	- Fedora23
 		-  Add yum repository for virtualbox
+			
 			cd /etc/yum.repos.d/
 			wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
 			dnf update
 
 		-  Check that the system is running latest installed kernel version
 		Output of foll. commands version numbers should match:
+			
 			rpm -qa kernel |sort -V |tail -n 1
 			uname -r
 
 		-  Install dependencies
+			
 			dnf install binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms
 
 		-  Install VirtualBox latest version 5.0
+			
 			dnf install VirtualBox-5.0
 		-  Add VirtualBox User to vboxusers Group
+			
 			usermod -a -G vboxusers user_name
 		-  Start VirtualBox and proceed to installing Genymotion
+			
 			VirtualBox
 ######Refference:
 - [VirtualBox 5.0 on Fedora 24/23, CentOS/RHEL 7.2/6.8/5.11](http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/)
 
 ###Download Genymotion
+	
 	chmod +x genymotion-x.x.x_x64.bin
+	
 	./genymotion-x.x.x_x64.bin
 
 ###Cool Java stuff
 	//Diagonosing java code to find out if a method is not good to run as a inline method
+	
 	java -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining jcookb.SubStringDemo
+	
 	//Running JUnit Tests
+	
 	java -cp $CLASSPATH org.junit.runner.JUnitCore testing.SuiteTest
 
+
 ###Use strings command line to scan for strings in the binary file
+	
 	strings some_binary_file
 
 ###Flaunt with the monkey
+	
 	adb shell monkey -p com.example.android.app -v 10000
 
 ###Add alias to a common action
 Add this to your ~/.bashrc
-	`alias name='value'`
+	
+	alias name='value'
+
 where name is the short form of the action(value) that you choose for example
-	`alias ogc='google-chrome'`
+	
+	alias ogc='google-chrome'
+
 
 ###Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
-	`sudo apt-get install dconf-editor `
-	`sudo apt-get install gtk-theme-config` 
+	
+	sudo apt-get install dconf-editor
+
+	sudo apt-get install gtk-theme-config
+
 Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it
 
 ###Create Bootable Ubuntu USB 
-	Either use Ubuntu default Startup Disk Creator or right click on the ISO file
-	and open with Disk Image Writer select the USB drive, start the restore 
-	procedure and after when its done you have your bootable USB drive.
+Either use Ubuntu default Startup Disk Creator or right click on the ISO file and open with Disk Image Writer select the USB drive, start the restore procedure and after when its done you have your bootable USB drive.
 ######Refference:
 - [Unknown ERROR from Startup Disk Creator](http://askubuntu.com/questions/485357/unknown-error-from-startup-disk-creator)
 
@@ -429,6 +493,7 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 	-  Mount ISO using Open with - Disk Image Mounter
 
 3. Make it Bootable
+
 	```bash
 	sudo apt-get install grub-pc-bin
 	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
@@ -589,10 +654,9 @@ blacklist it for the two MTK vendor IDs the flash tool uses:
 
 with the following contents:
 	
-	```bash
 	ATTRS{idVendor}=="0e8d", ENV{ID_MM_DEVICE_IGNORE}="1"
 	ATTRS{idVendor}=="6000", ENV{ID_MM_DEVICE_IGNORE}="1"
-	```
+	
 
 Restart udev for the changes to take effect:
 	
@@ -614,11 +678,15 @@ change the download agent to MTK_AllInOne_DA.bin
 If you run into more errors, you could get a hint about what is wrong from [here](http://en.miui.com/thread-78047-1-1.html "Flashtools errors and their solutions! - MIUI")
 
 ######References:
-	- [How to root MTK based mobile devices using a Linux PC?](http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc)
-	- [[TUTORIAL]How to setup SP_Flash_Tool_Linux (MTK/MediaTek Soc)](http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
+
+[How to root MTK based mobile devices using a Linux PC?](http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc)
+
+[How to setup SP_Flash_Tool_Linux (MTK/MediaTek Soc)](http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
 
 ###Configure hotkeys on Fedora
+
 [click here for original post.](https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora)
+
 Open Settings->Keyboard, switch to Shortcuts tab
 Then configure Audio control and volume control keys by assigning new accelerator
 
@@ -662,7 +730,14 @@ where: /dev/sda4 is the partition name
 
 
 ###Fix Native Window Placement extention to display the title on top or bottom
-Tweak the stylesheet.css to modify the window title placement.open `"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css"`, change `"-shell-caption-spacing"` as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
+Tweak the stylesheet.css to modify the window title placement.open
+	
+	"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css"
+
+	and change 
+
+	"-shell-caption-spacing"
+	as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
 
 ###Add API keys to Android Studio for your apps the right way
 First open gradle.properties file, then add API key in the form

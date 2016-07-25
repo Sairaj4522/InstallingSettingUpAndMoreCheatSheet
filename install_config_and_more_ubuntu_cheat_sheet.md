@@ -477,43 +477,54 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 ###Unlocking Bootloader on Moto e
 First get unlock data which will be fed to OEM to get secret code
 
-	`fastboot oem get_unlock_data`
+	fastboot oem get_unlock_data
 
-	`fastboot oem unlock {secret-code-from-OEM}`
+	fastboot oem unlock {secret-code-from-OEM}
 
 TODO Add extracting .img files and cwm flashable zip creation steps
 
 In adb shell issue these commands to get mount information
-	`cat /proc/dumchar_info`
-	`cat /proc/mtd`
+	
+	cat /proc/dumchar_info
+	
+	cat /proc/mtd
 
 ###Flashing Devices with Fastboot mode
 install Android SDK which provides almost all the tools to do this.
 issue this command to check if the device is detected
-	`fastboot devices`
-now fetch your recovery.img, boot.img, etc.
-	```bash
-	fastboot flash recovery recovery.img
-	fastboot flash boot boot.img
-	fastboot flash logo logo.bin
-	```
+	
+	fastboot devices
 
+now fetch your recovery.img, boot.img, etc.
+
+	fastboot flash recovery recovery.img
+
+	fastboot flash boot boot.img
+
+	fastboot flash logo logo.bin
 
 ###Flashing MTK based mobile devices
 
 First install libusb-dev
-	`sudo apt-get install libusb-dev`
+	
+	sudo apt-get install libusb-dev
 
-Get latest SP Flash tool Linux version from http://spflashtool.com/
-unzip the file and cd into the directory
+
+Get latest SP Flash tool Linux version from [spflashtool.com/](http://spflashtool.com/) unzip the file and cd into the directory
 
 In order to avoid running the flash_tool as root user, you need to add a standard user to the usergroup "dialout"
-	`sudo adduser username dialout`
+	
+	sudo adduser username dialout
+
 and activate the membership immediately
-	`newgrp - dialout`
+	
+	newgrp - dialout
+
 
 Open the tool
-	`./flash_tool`
+	
+	./flash_tool
+
 
 You can try at this stage if the flash tool connects to your phone:
 In the user interface, choose tab „Download“. Hit "scatter-loading", navigate to a directory with a valid firmware
@@ -529,19 +540,30 @@ while plugging the cable into the phone.
 Please look up device-specific threads and try out different options.
 
 If nothing happens at all, open a second terminal, run
-	`dmesg | grep usb`
+	
+	dmesg | grep usb
+
+
 and look out for a MediaTek entry. If there is none -> did you install libusb-dev
 
 If the answer is yes, then you might need to create a persistent udev rule for the MTK Preloader:
-	`sudo gedit /etc/udev/rules.d/80-persistent-usb.rules`
+	
+
+	sudo gedit /etc/udev/rules.d/80-persistent-usb.rules
+
 
 and add the following line to the file:
-	`SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="*"`
+	
+
+	SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="*"
+
 
 save the file and exit.
 
 Reload the usb-rules:
-	`sudo service udev restart`
+	
+	sudo service udev restart
+
 
 Disconnect the usb cable, close the tool window.
 
@@ -560,18 +582,30 @@ From Sergio Riveros tutorial on mibqyyo, he mentions:
 
 To put it in other words: The modem manager controls port /dev/ttyACM0 and disables the Flash Tool. So we
 blacklist it for the two MTK vendor IDs the flash tool uses:
-	`sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules`
+	
+
+	sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules
+
+
 with the following contents:
+	
 	```bash
 	ATTRS{idVendor}=="0e8d", ENV{ID_MM_DEVICE_IGNORE}="1"
 	ATTRS{idVendor}=="6000", ENV{ID_MM_DEVICE_IGNORE}="1"
 	```
 
 Restart udev for the changes to take effect:
-	`sudo service udev restart`
+	
+
+	sudo service udev restart
+
+
 
 Switch your phone on (fastboot mode will suffice) and off again
-	`./flash_tool`
+	
+
+	./flash_tool
+
 
 Now everything should run smoothly. In case you encounter
 	BROM ERROR : S_SECURITY_SF_CODE_FORMAT_FORBIDDEN (6012) , MSP ERROE CODE : 0x00
@@ -591,7 +625,9 @@ Then configure Audio control and volume control keys by assigning new accelerato
 Now select Custom Shortcuts in left pane, here you can add new shortcuts by clicking on + button ;
 for adding hotkeys for brightness control install xbacklight
 
-	`sudo dnf install xbacklight`
+	
+	sudo dnf install xbacklight
+
 	
 then press that + button and add name and command in the fields in the dialog window
 for increasing brightness, `xbacklight -inc 10%`
@@ -599,20 +635,31 @@ and for decreasing it, `xbacklight -dec 10%`
 these commands increases or decreases brightness by 10 percent
 
 Add terminal shortcut using any name for the title and add command as
-`gnome-terminal`
+
+	gnome-terminal
+
 
 TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
 
 
 ###Mount drives on boot in Fedora 23
 To do this we have to edit /etc/fstab file, so 
-	`sudo gedit /etc/fstab`
+	
+	sudo gedit /etc/fstab
+
+
 and add following to the end of the file:
-	`/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2`
+	
+
+	/dev/sda4 /run/media/my_user_name/Data ntfs defaults 1 2
+
 
 where: /dev/sda4 is the partition name
-       `/run/media/my_user_name/Data` is the mount point
+       
+       /run/media/my_user_name/Data is the mount point
+       
        ntfs is the partition type you have to choose options as defaults and latter part is the order to check
+
 
 ###Fix Native Window Placement extention to display the title on top or bottom
 Tweak the stylesheet.css to modify the window title placement.open `"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css"`, change `"-shell-caption-spacing"` as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.

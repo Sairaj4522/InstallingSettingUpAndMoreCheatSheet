@@ -432,7 +432,8 @@ Press Alt+F2 and open Theme configuration and change color for the Highlight bac
 	```bash
 	sudo apt-get install grub-pc-bin
 	sudo grub-install --target=i386-pc --boot-directory="/media/<username>/<drive_label>/boot" /dev/sdX
-	```	Replace /dev/sdX with the USB drive(eg. /dev/sdb)
+	```
+	Replace /dev/sdX with the USB drive(eg. /dev/sdb)
 
 	-  Create grub.cfg file
 		and add following

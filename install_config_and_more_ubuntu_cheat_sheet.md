@@ -532,6 +532,15 @@ Either use Ubuntu default Startup Disk Creator or right click on the ISO file an
 ######Refference:
 - [Make a bootable Windows USB from Linux](http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)
 
+#####After doing above stuff
+You will like the way to crate live USB for Linux(Ubuntu/Fedora/other distros) and crating Windows bootable disk takes too much time.
+So next you can use this command  
+	
+	sudo dd if=/dev/sdX of=Windows.img
+
+where /dev/sdX is the device in this case USB stick.
+
+This will create an image of you USB stick, you can then use way it is mentioned under *Create Bootable Ubuntu USB*
 
 ###List of softwares for Ubuntu
 - vlc browser-plugin-vlc

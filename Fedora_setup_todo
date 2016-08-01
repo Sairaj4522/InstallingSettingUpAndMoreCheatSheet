@@ -1,0 +1,30 @@
+Remove
+gnome-software	*
+
+Go through blogs about 20 things tod do after fedora installation
+and add everything you do to the install_config_ubuntu_
+
+Install
+Java7 and download latest Java8u92	*
+configure to use latest java8 web start	*
+setup kvm for Android emulator	*
+Fedy	*
+gnome tweak tool	*
+Chrome	*
+	Setup mail on fedora and login on chrome	*	
+vlc	*
+browser-plugin-vlc
+enable gnome extentions	*
+	easy screencast	*
+	enable minimize maximize buttons	*
+	coverflow *
+NetHogs	*
+xbacklight	*
+SublimeText3	*
+gstreamer 1.0 and 0.10 full(good, bad and ugly) *
+redshift	*
+WPS
+VirtualBox	*
+Gimp	*
+Blender	*
+GParted	*

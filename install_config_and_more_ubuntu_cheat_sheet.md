@@ -11,6 +11,32 @@ Section	"Device"
 	BusID	"PCI:0:2:0"
 EndSection
 ```
+####Update
+Warning! This method is only to be used on Intel Graphics Controllers
+Open terminal
+	lspci -vnn | grep -i VGA -A 12
+and check which one your system is using
+my system returned following
+
+
+	maez $ lspci -vnn | grep -i VGA -A 12
+	00:02.0 VGA compatible controller [0300]: Intel Corporation 3rd Gen Core processor Graphics Controller [8086:0166] (rev 09) (prog-if 00 [VGA controller])
+		DeviceName: 64
+		Subsystem: Hewlett-Packard Company Device [103c:17f3]
+		Flags: bus master, fast devsel, latency 0, IRQ 31
+		Memory at d0000000 (64-bit, non-prefetchable) [size=4M]
+		Memory at c0000000 (64-bit, prefetchable) [size=256M]
+		I/O ports at 3000 [size=64]
+		[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+		Capabilities: <access denied>
+		Kernel driver in use: i915
+		Kernel modules: i915
+
+	00:14.0 USB controller [0c03]: Intel Corporation 7 Series/C210 Series Chipset Family USB xHCI Host Controller [8086:1e31] (rev 04) (prog-if 30 [XHCI])
+
+
+check field "Kernel diver in use", if it is nouveau, then you don't have to do this at all.
+If the field is nvidia then I'll strogly discourage use of this method. I tested this on some laptop installed nvidia graphics drivers and the tried above method after I restrated the laptop, it stuck to blank screen, and then a dialog appeared which read somewhat like "X server could not find display" and so couldn't boot, this didnt even land on a console so that I could fix it, I had re-install whole Ubuntu OS, So beware!
 
 ###Disable Bluetooth by Default on Startup
 	sudo gedit /etc/rc.local

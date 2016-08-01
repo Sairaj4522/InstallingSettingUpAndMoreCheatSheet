@@ -43,10 +43,10 @@ check field "Kernel diver in use",
 - If it is nouveau, then you don't have to do this at all.
 - If the field is nvidia then I'll strogly discourage use of this method.
 
-I tested this on some laptop which had nvidia graphics drivers installedz, then I tried above method.
+I tested this on some laptop which had nvidia graphics drivers installed, then I tried above method.
 After I restrated the laptop, it got stuck on a blank screen, and then a dialog appeared which read
 somewhat like "X server could not find display".
-So couldn't boot. This didnt even land me on a console so that I could fix it, I had re-install whole Ubuntu OS, So beware!
+So couldn't boot. This didnt even land me on a console so that I could fix it, I had to re-install whole Ubuntu OS, So beware!
 
 ###Disable Bluetooth by Default on Startup
 	sudo gedit /etc/rc.local

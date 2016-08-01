@@ -13,10 +13,14 @@ EndSection
 ```
 ####Update
 Warning! This method is only to be used on Intel Graphics Controllers
+
 Open terminal
+
 	lspci -vnn | grep -i VGA -A 12
-and check which one your system is using
-my system returned following
+
+and check which one your system is using.
+
+My system returned following
 
 
 	maez $ lspci -vnn | grep -i VGA -A 12
@@ -35,8 +39,14 @@ my system returned following
 	00:14.0 USB controller [0c03]: Intel Corporation 7 Series/C210 Series Chipset Family USB xHCI Host Controller [8086:1e31] (rev 04) (prog-if 30 [XHCI])
 
 
-check field "Kernel diver in use", if it is nouveau, then you don't have to do this at all.
-If the field is nvidia then I'll strogly discourage use of this method. I tested this on some laptop installed nvidia graphics drivers and the tried above method after I restrated the laptop, it stuck to blank screen, and then a dialog appeared which read somewhat like "X server could not find display" and so couldn't boot, this didnt even land on a console so that I could fix it, I had re-install whole Ubuntu OS, So beware!
+check field "Kernel diver in use",
+- If it is nouveau, then you don't have to do this at all.
+- If the field is nvidia then I'll strogly discourage use of this method.
+
+I tested this on some laptop which had nvidia graphics drivers installedz, then I tried above method.
+After I restrated the laptop, it got stuck on a blank screen, and then a dialog appeared which read
+somewhat like "X server could not find display".
+So couldn't boot. This didnt even land me on a console so that I could fix it, I had re-install whole Ubuntu OS, So beware!
 
 ###Disable Bluetooth by Default on Startup
 	sudo gedit /etc/rc.local

@@ -1,0 +1,47 @@
+Theme:
+	# Refer Noobs Lab
+	Numix
+	Icons: Numix Circle
+
+Tools:
+	Unity Tweak Tool
+	Gnome Tweak Tool
+	RedShift
+
+	# For Invert Window Option
+	CompizConfig Settings Manager
+	* sudo apt-get install compizconfig-settings-manager compiz-plugins
+		- check Negative in CCSM
+
+	OpenJDK
+	LAMP Stack
+
+Software:
+	Gimp
+	Inkscape
+	Blender
+	Sublime Text
+	Filezilla
+	VLC
+	VpnOneClick
+		* sudo apt install openvpn & (other dependencies)
+	Putty
+	qBittorrent
+	Chrome Browser
+	Etcher
+	Spotify
+	CairoDock
+	Bleachbit
+	VirtualBox
+	Wine
+	PlayOnLinux
+	Genymotion
+	Flash Player
+
+Launcher:
+	Autohide
+	Transparency set to zero
+
+Terminal:
+	# Refer github page
+	Install Zsh & Oh-my-Zsh

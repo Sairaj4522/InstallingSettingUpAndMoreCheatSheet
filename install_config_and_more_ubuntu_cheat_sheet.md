@@ -797,3 +797,9 @@ thats it now use your API keys in Java code by refering BuildConfig constants li
 ```java
 	String api_key = BuildConfig.MY_API_KEY;
 ```
+Installing and setup is continued from here!
+
+Installing and setting up python environment for ML model training
+!pip install mediapipe opencv-python datasets scikit-learn pillow numpy joblib tqdm
+
+

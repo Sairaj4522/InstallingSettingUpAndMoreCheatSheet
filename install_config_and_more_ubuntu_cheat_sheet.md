@@ -802,4 +802,158 @@ Installing and setup is continued from here!
 Installing and setting up python environment for ML model training
 !pip install mediapipe opencv-python datasets scikit-learn pillow numpy joblib tqdm
 
+from datasets import load_dataset
+import mediapipe as mp
+import numpy as np
+from PIL import Image
+from tqdm import tqdm
+import pandas as pd
+import random
 
+# 1. Load dataset (only subset)
+dataset = load_dataset("Samarth0710/bharatanatyam-mudra-dataset")
+train_data = dataset["train"]
+
+# 2. Setup MediaPipe
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1)
+
+def extract_landmarks(image):
+    """Return flattened landmark list [x0,y0,z0,...] or None if not detected"""
+    results = hands.process(np.array(image))
+    if not results.multi_hand_landmarks:
+        return None
+    lm = results.multi_hand_landmarks[0]
+    return [coord for l in lm.landmark for coord in (l.x, l.y, l.z)]
+
+# 3. Process dataset subset
+all_data = []
+labels = []
+
+# Shuffle and use only 25% samples per class
+classes = list(set(train_data["label"]))
+for cls in tqdm(classes, desc="Extracting landmarks"):
+    samples = [s for s in train_data if s["label"] == cls]
+    subset = random.sample(samples, max(1, len(samples)//4))  # ~25%
+    for s in subset:
+        image = s["image"].convert("RGB")
+        landmarks = extract_landmarks(image)
+        if landmarks:
+            all_data.append(landmarks)
+            labels.append(cls)
+
+# 4. Save landmarks to CSV
+df = pd.DataFrame(all_data)
+df["label"] = labels
+df.to_csv("mudra_landmarks.csv", index=False)
+print(f"Extracted landmarks from {len(df)} samples.")
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+import joblib
+import pandas as pd
+
+# Load landmark data
+data = pd.read_csv("mudra_landmarks.csv")
+X = data.drop("label", axis=1)
+y = data["label"]
+
+# Split and train
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = RandomForestClassifier(n_estimators=200, max_depth=20)
+model.fit(X_train, y_train)
+
+# Evaluate
+preds = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+
+# Save
+joblib.dump(model, "mudra_classifier.pkl")
+print("Model saved as mudra_classifier.pkl")
+
+
+import pandas as pd
+
+data = pd.read_csv("mudra_landmarks.csv")
+
+print(data.head(5))
+
+from datasets import load_dataset
+import mediapipe as mp
+import numpy as np
+from PIL import Image
+from tqdm import tqdm
+import pandas as pd
+import random
+
+# 1. Load dataset
+dataset = load_dataset("Samarth0710/bharatanatyam-mudra-dataset")
+train_data = dataset["train"]
+
+# 2. Setup MediaPipe
+mp_hands = mp.solutions.hands
+hands_detector = mp_hands.Hands(static_image_mode=True, max_num_hands=2)
+
+def extract_landmarks_dual(image):
+    """Return concatenated landmarks for both hands (126 features: 2x21x3).
+       If hand missing, pad with zeros"""
+    results = hands_detector.process(np.array(image))
+    # Initialize left and right hands
+    hand_coords = [np.zeros(63), np.zeros(63)]  # 21x3 per hand
+    if results.multi_hand_landmarks and results.multi_handedness:
+        for idx, handLms in enumerate(results.multi_hand_landmarks):
+            landmarks = [coord for l in handLms.landmark for coord in (l.x, l.y, l.z)]
+            if results.multi_handedness[idx].classification[0].label == "Left":
+                hand_coords[0] = np.array(landmarks)
+            else:
+                hand_coords[1] = np.array(landmarks)
+    return np.concatenate(hand_coords)
+
+# 3. Process dataset subset
+all_data = []
+labels = []
+
+classes = list(set(train_data["label"]))
+for cls in tqdm(classes, desc="Extracting landmarks"):
+    samples = [s for s in train_data if s["label"] == cls]
+    subset = random.sample(samples, max(1, len(samples)))
+    for s in subset:
+        image = s["image"].convert("RGB")
+        landmarks = extract_landmarks_dual(image)
+        if landmarks is not None:
+            all_data.append(landmarks)
+            labels.append(cls)
+
+# 4. Save to CSV
+df = pd.DataFrame(all_data)
+df["label"] = labels
+df.to_csv("mudra_landmarks_dual.csv", index=False)
+print(f"Extracted landmarks from {len(df)} samples.")
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+import joblib
+import pandas as pd
+
+# Load landmark data
+data = pd.read_csv("mudra_landmarks_dual.csv")
+X = data.drop("label", axis=1)
+y = data["label"]
+
+# Split and train
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = RandomForestClassifier(n_estimators=200, max_depth=20)
+model.fit(X_train, y_train)
+
+# Evaluate
+preds = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, preds))
+print(classification_report(y_test, preds))
+
+# Save model
+joblib.dump(model, "mudra_classifier_dual.pkl")
+print("Model saved as mudra_classifier_dual.pkl")

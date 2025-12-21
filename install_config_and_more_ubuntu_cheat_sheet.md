@@ -1,4 +1,4 @@
-#Brightness control fix on Ubuntu
+# Brightness control fix on Ubuntu
 	sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 	sudo gedit /usr/share/X11/xorg.conf.d/20-intel.conf
 and add the following 
@@ -11,7 +11,7 @@ Section	"Device"
 	BusID	"PCI:0:2:0"
 EndSection
 ```
-##Update
+## Update
 Warning! This method is only to be used on Intel Graphics Controllers
 
 Open terminal
@@ -48,13 +48,13 @@ After I restrated the laptop, it got stuck on a blank screen, and then a dialog 
 somewhat like "X server could not find display".
 So couldn't boot. This didnt even land me on a console so that I could fix it, I had to re-install whole Ubuntu OS, So beware!
 
-#Disable Bluetooth by Default on Startup
+# Disable Bluetooth by Default on Startup
 	sudo gedit /etc/rc.local
 
 just before 'exit 0' add
 	rfkill block bluetooth
 
-#Installing Oracle Java
+# Installing Oracle Java
 	- Ubuntu
 		Using webupd8team ppa
 			
@@ -87,10 +87,10 @@ just before 'exit 0' add
 			alternatives --config javac
 			alternatives --config jar
 
-##Referrence:
+## Referrence:
 - [Install Oracle Java JDK/JRE 8u66 on Fedora 23/22, CentOS/RHEL 7.2/6.7/5.11](http://www.if-not-true-then-false.com/2014/install-oracle-java-8-on-fedora-centos-rhel/)
 
-#Installing kvm for Android Studio ([source](https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator))
+# Installing kvm for Android Studio ([source](https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator))
 
 [click here for documentation page](https://help.ubuntu.com/community/KVM/Installation)
  - Ubuntu
@@ -107,7 +107,7 @@ just before 'exit 0' add
 	sudo usermod meaz -a -G dialout,kvm,libvirtd
 	```
 
-#Solving Android device unauthorised in adb devices list
+# Solving Android device unauthorised in adb devices list
 	gedit android.rules
 
 ```bash
@@ -146,17 +146,17 @@ SUBSYSTEM=="usb" ATTR{idVendor}=="1782", MODE="0666"
 	sudo cp android.rules /etc/udev/rules.d/51-android.rules
 	sudo chmod og+r /etc/udev/rules.d/51-android.rules
 
-#Uninstall Libreoffice and install Openoffice
+# Uninstall Libreoffice and install Openoffice
 	aptitude search '~i' | grep libreoffice
 	sudo apt-get install -s remove libreoffice-core
 	sudo apt-get install remove libreoffice-core
 Download OpenOffice from it's official website, *.tar.gz, extract and
 	sudo dpkg -i *.deb
 
-##Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
+## Alternative to libreoffice and openoffice is WPS Kingsoft Office suite
 
 
-#Install redshift
+# Install redshift
 	sudo apt-get install redshift*
 	sudo gedit /usr/share/applications/redshift-gtk.desktop
 add  `-l 18.98:72.83` next to `Exec=redshift-gtk`
@@ -165,7 +165,7 @@ start redshift and select autostart in its options menu.
 Open Startup Applications app select RedShift and press edit button
 and add `-l 18.98:72.83` next to `redshift-gtk` command field
 
-#Ubuntu/Debian APT stuff
+# Ubuntu/Debian APT stuff
 - To fix unmet dependencies of the packages installed on the system
 	
 	sudo apt-get install -f
@@ -183,7 +183,7 @@ and add `-l 18.98:72.83` next to `redshift-gtk` command field
 
 	sudo apt-get install --fix-missing
 
-#Enable Hibernate
+# Enable Hibernate
 	sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
 ```bash
 [Re-enable hibernate by default in upower]
@@ -198,23 +198,23 @@ ResultActive=yes
 ```
 `killall unity-panel-service`
 
-#Installing Sublime-text-3
-##Ubuntu/Debian
+# Installing Sublime-text-3
+## Ubuntu/Debian
 	
 	sudo add-apt-repository ppa:webupd8team/sublime-text-3
 	sudo apt-get update
 	sudo apt-get install sublime-text-installer
 
-##Fedora/(other linux distros)
+## Fedora/(other linux distros)
 	
 	curl -L git.io/sublimetext | sh
 
-#Install subversion and git
+# Install subversion and git
 	
 	sudo apt-get install subversion
 	sudo apt-get install git
 
-#Doing Git Stuff
+# Doing Git Stuff
 - Setup git global properties using
 	
 	git config --global user.email "name@example.com"
@@ -250,7 +250,7 @@ ResultActive=yes
 	git config --global merg.conflictstyle diff3
 	```
 	
-#Configuring Git prompt
+# Configuring Git prompt
 Add following to the end of ~/.bashrc for this you need [git-prompt.sh](git-prompt.sh) and [git-completion.bash](git-completion.bash)
 
 ```bash
@@ -344,10 +344,10 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 
 TODO Download How to Use Git and GitHub Udacity Videos and add all git commands here.
 
-#Installing Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04
+# Installing Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04
 TODO add stuff here!
 
-#Setting up ClamAV and Running Virus scans
+# Setting up ClamAV and Running Virus scans
 - Install on ubuntu using
 	
 	sudo apt-get install clamav clamav-daemon -y
@@ -373,19 +373,19 @@ TODO add stuff here!
 	sudo /etc/init.d/clamav-daemon status
 
 
-#Changing brightness at Startup to lower value as compare to max_brightness
+# Changing brightness at Startup to lower value as compare to max_brightness
 Add this line to '/etc/rc.local' before 'exit 0'
 	
 	echo 900 > /sys/class/backlight/intel_backlight/brightness
 
-#Adding AVR support in eclipse on Ubuntu
+# Adding AVR support in eclipse on Ubuntu
 	
 	sudo apt-get install avr-libc avrdude binutils-avr
 
 Open eclipse
 Go to Help-->Install New Software... and add http://avr-eclipse.sourceforge.net/updatesite/ in Text input and press Add Site button
 
-#Adding support for the varous USB AVR devices
+# Adding support for the varous USB AVR devices
 Create a file avrisp.rules
 	
 	gedit ~/avrisp.rules
@@ -431,7 +431,7 @@ another dependency for compiling above programs
 	sudo ./avrusbboot ~/test.hex
 	```
 
-#Setting up Genymotion
+# Setting up Genymotion
 	- Ubuntu
 		
 		sudo apt-get install virtualbox
@@ -462,16 +462,16 @@ another dependency for compiling above programs
 		-  Start VirtualBox and proceed to installing Genymotion
 			
 			VirtualBox
-##Refference:
+## Refference:
 - [VirtualBox 5.0 on Fedora 24/23, CentOS/RHEL 7.2/6.8/5.11](http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/)
 
-#Download Genymotion
+# Download Genymotion
 	
 	chmod +x genymotion-x.x.x_x64.bin
 	
 	./genymotion-x.x.x_x64.bin
 
-#Cool Java stuff
+# Cool Java stuff
 	//Diagonosing java code to find out if a method is not good to run as a inline method
 	
 	java -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining jcookb.SubStringDemo
@@ -481,15 +481,15 @@ another dependency for compiling above programs
 	java -cp $CLASSPATH org.junit.runner.JUnitCore testing.SuiteTest
 
 
-#Use strings command line to scan for strings in the binary file
+# Use strings command line to scan for strings in the binary file
 	
 	strings some_binary_file
 
-#Flaunt with the monkey
+# Flaunt with the monkey
 	
 	adb shell monkey -p com.example.android.app -v 10000
 
-#Add alias to a common action
+# Add alias to a common action
 Add this to your ~/.bashrc
 	
 	alias name='value'
@@ -499,7 +499,7 @@ where name is the short form of the action(value) that you choose for example
 	alias ogc='google-chrome'
 
 
-#Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
+# Customize theme specifics in Ubuntu, such as highlight color, menu background color,etc.
 	
 	sudo apt-get install dconf-editor
 
@@ -507,12 +507,12 @@ where name is the short form of the action(value) that you choose for example
 
 Press Alt+F2 and open Theme configuration and change color for the Highlight background and click on toggle button to enable it
 
-#Create Bootable Ubuntu USB 
+# Create Bootable Ubuntu USB 
 Either use Ubuntu default Startup Disk Creator or right click on the ISO file and open with Disk Image Writer select the USB drive, start the restore procedure and after when its done you have your bootable USB drive.
-##Refference:
+## Refference:
 - [Unknown ERROR from Startup Disk Creator](http://askubuntu.com/questions/485357/unknown-error-from-startup-disk-creator)
 
-#Create Windows Bootable USB on Ubuntu
+# Create Windows Bootable USB on Ubuntu
 1. Format USB
 	-  Open GParted, first unmount the USB drive, recreate the partition table by going
 	to the Device menu then select Create Partition Table. Choose 'msdos' and click
@@ -565,10 +565,10 @@ Either use Ubuntu default Startup Disk Creator or right click on the ISO file an
 		Replace "usb_drive_label" with the label from step 1
 		Save this file and put in boot/grub folder on USB drive.
 
-##Refference:
+## Refference:
 - [Make a bootable Windows USB from Linux](http://onetransistor.blogspot.in/2014/09/make-bootable-windows-usb-from-ubuntu.html)
 
-#After doing above stuff
+# After doing above stuff
 You will like the way to crate live USB for Linux(Ubuntu/Fedora/other distros) and crating Windows bootable disk takes too much time.
 So next you can use this command  
 	
@@ -578,13 +578,13 @@ where /dev/sdX is the device in this case USB stick.
 
 This will create an image of you USB stick, you can then use way it is mentioned under *Create Bootable Ubuntu USB*
 
-#List of softwares for Ubuntu
+# List of softwares for Ubuntu
 - vlc browser-plugin-vlc
 - chrome
 - gstreamer 1.0 and 0.10 full(good, bad and ugly) 
 
 
-#Unlocking Bootloader on Moto e
+# Unlocking Bootloader on Moto e
 First get unlock data which will be fed to OEM to get secret code
 
 	fastboot oem get_unlock_data
@@ -599,7 +599,7 @@ In adb shell issue these commands to get mount information
 	
 	cat /proc/mtd
 
-#Flashing Devices with Fastboot mode
+# Flashing Devices with Fastboot mode
 install Android SDK which provides almost all the tools to do this.
 issue this command to check if the device is detected
 	
@@ -613,7 +613,7 @@ now fetch your recovery.img, boot.img, etc.
 
 	fastboot flash logo logo.bin
 
-#Flashing MTK based mobile devices
+# Flashing MTK based mobile devices
 
 First install libusb-dev
 	
@@ -722,13 +722,13 @@ change the download agent to MTK_AllInOne_DA.bin
 
 If you run into more errors, you could get a hint about what is wrong from [here](http://en.miui.com/thread-78047-1-1.html "Flashtools errors and their solutions! - MIUI")
 
-##References:
+## References:
 
 [How to root MTK based mobile devices using a Linux PC?](http://android.stackexchange.com/questions/119068/how-to-root-mtk-based-mobile-devices-using-a-linux-pc)
 
 [How to setup SP_Flash_Tool_Linux (MTK/MediaTek Soc)](http://forum.xda-developers.com/general/rooting-roms/tutorial-how-to-setup-spflashtoollinux-t3160802)
 
-#Configure hotkeys on Fedora
+# Configure hotkeys on Fedora
 
 [click here for original post.](https://www.howtoforge.com/manage-your-laptop-hotkeys-on-fedora)
 
@@ -755,7 +755,7 @@ Add terminal shortcut using any name for the title and add command as
 TODO Add how to disable some of the system hotkeys which interfere with Android studio default keys
 
 
-#Mount drives on boot in Fedora 23
+# Mount drives on boot in Fedora 23
 To do this we have to edit /etc/fstab file, so 
 	
 	sudo gedit /etc/fstab
@@ -774,10 +774,10 @@ where: /dev/sda4 is the partition name
        ntfs is the partition type you have to choose options as defaults and latter part is the order to check
 
 
-#Fix Native Window Placement extention to display the title on top or bottom
+# Fix Native Window Placement extention to display the title on top or bottom
 Tweak the stylesheet.css to modify the window title placement.open `"/home/$USER/.local/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com/stylesheet.css` and change `-shell-caption-spacing` as you like. 0px (on top) or 26px (below) would do. Restart the extension with toggling on/off switch in this page or tweak tool.
 
-#Add API keys to Android Studio for your apps the right way
+# Add API keys to Android Studio for your apps the right way
 First open gradle.properties file, then add API key in the form
 
 	MyApiKey="{Your API Key}"

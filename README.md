@@ -93,14 +93,20 @@ just before 'exit 0' add
 # Installing kvm for Android Studio ([source](https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator))
 
 [click here for documentation page](https://help.ubuntu.com/community/KVM/Installation)
- - Ubuntu
+ - Ubuntu (Old Method)
 	```bash
 	sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 	sudo adduser your_user_name kvm
 	sudo adduser your_user_name libvirtd
 	```
+### Update For Ubuntu > 22.04 LTS
+	```bash
+	sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+	sudo adduser your_user_name kvm
+	sudo adduser your_user_name libvirt
+	```
 
- - Fedora
+ - Fedora (Old method)
 	```bash
 	sudo useradd maez -D -G dialout,kvm,libvirtd
 	or try,

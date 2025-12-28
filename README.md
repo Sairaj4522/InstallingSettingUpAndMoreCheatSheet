@@ -805,6 +805,37 @@ thats it now use your API keys in Java code by refering BuildConfig constants li
 ```
 Installing and setup is continued from here!
 
+# How to check temps from command line in Ubuntu 22.04 LTS
+```bash
+	sudo apt-get install lm-sensors 
+	
+	sudo sensors-detect
+	
+	sensors
+	watch -n 1 sensors
+
+	sudo apt-get install stress-ng
+	nproc
+	
+	stress-ng --cpu 4 --timeout 30s
+	
+	dd if=/dev/zero of=/tmp/ssd_testfile bs=1M count=1024 status=progress
+	
+	dd if=/dev/zero of=/tmp/ssd_testfile bs=1M count=2048 status=progress
+	rm /tmp/ssd_testfile
+	
+	lsblk -d -o NAME,MODEL,TRAN
+
+	sudo apt-get install smartmontools
+	
+	sudo smartctl -A /dev/sda
+
+	sudo smartctl -A /dev/sda | grep -i temperature
+
+	
+	watch -n 2 "sudo smartctl -A /dev/sda | grep -i temperature"
+```
+
 Installing and setting up python environment for ML model training
 !pip install mediapipe opencv-python datasets scikit-learn pillow numpy joblib tqdm
 

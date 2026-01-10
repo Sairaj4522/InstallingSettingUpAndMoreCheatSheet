@@ -836,6 +836,27 @@ Installing and setup is continued from here!
 	watch -n 2 "sudo smartctl -A /dev/sda | grep -i temperature"
 ```
 
+# Install Spotify on Ubuntu 22.04 Lts
+The default method to install Spotify client as it is shown in [spotify download page] (https://www.spotify.com/us/download/linux/) dont work for Ubuntu 22.04 Lts since the current version of Spotify is built on newer system libraries but Ubuntu 22.04 Lts has glibc 2.35 and so it shows 
+```bash
+	/lib/x86_64-linux-gnu/libm.so.6: version GLIBC_2.38' not found (required by spotify) spotify: /lib/x86_64-linux-gnu/libc.so.6: version GLIBC_2.38' not found (required by spotify)
+```
+
+So use flatpak version of the same spotify version, the flatpak works as a self container for required libraries by apps installed using it.
+
+```bash
+	
+	sudo apt-get install flatpak
+	
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	
+	flatpak install flathub com.spotify.Client
+	
+	update-desktop-database ~/.local/share/applications ~/.local/share/flatpak/exports/share/applications
+```
+
+You can also install the same using snap and it gives same feature as flatpak, but the load times with snap enabled is terrible ((same for hdd or ssd)) and I personally hate it, that's the first thing I do nowadays after new distro installation, also the reason why I'm still on Ubuntu 22.04 Lts in 2026.
+
 Installing and setting up python environment for ML model training
 !pip install mediapipe opencv-python datasets scikit-learn pillow numpy joblib tqdm
 
